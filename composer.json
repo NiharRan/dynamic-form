@@ -1,0 +1,16 @@
+{
+    "name": "dynamic-form/api",
+    "description": "This is a demo plugin api",
+    "autoload": {
+        "psr-4": {
+            "DynamicForm\\Api\\": "api/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nihar Ranjan Das",
+            "email": "niharranjandasmu@gmail.com"
+        }
+    ],
+    "require": {}
+}
