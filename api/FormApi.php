@@ -152,6 +152,14 @@ class FormApi extends WP_REST_Controller
         return new WP_REST_Response($response);
     }
 
+    public function destroy(WP_REST_Request $request)
+    {
+        $params = $request->get_params();
+        $result = $this->dynamic_form->destroy($params['id']);
+
+        return new WP_REST_Response($result);
+    }
+
 
     public function find_one(WP_REST_Request $request)
     {

@@ -46,7 +46,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="form in forms" :key="form.email">
+          <tr v-for="(form, key) in forms" :key="key">
             <td class="px-3 whitespace-nowrap">
               <p class="text-lg font-semibold">{{ form.title }}</p>
               <div class="row-actions">
@@ -73,41 +73,12 @@
                   |
                 </span>
                 <span class="ff_duplicate"><a href="#"> Duplicate</a> | </span>
-                <span class="trash"
-                  ><span
-                    ><span
-                      ><div
-                        role="tooltip"
-                        id="el-popover-7217"
-                        aria-hidden="true"
-                        class="el-popover el-popper"
-                        tabindex="0"
-                        style="width: 160px; display: none;"
-                      >
-                        <!---->
-                        <p>Are you sure to delete this?</p>
-                        <div style="text-align: right; margin: 0px;">
-                          <button
-                            type="button"
-                            class="el-button el-button--text el-button--mini"
-                          >
-                            <!----><!----><span>cancel</span>
-                          </button>
-                          <button
-                            type="button"
-                            class="el-button el-button--primary el-button--mini"
-                          >
-                            <!----><!----><span>confirm</span>
-                          </button>
-                        </div>
-                      </div>
-                      <span class="el-popover__reference-wrapper"></span
-                    ></span>
-                    <span
-                      class="remove-btn el-popover__reference"
-                      aria-describedby="el-popover-7217"
-                      tabindex="0"
-                      ><a>Delete</a></span
+                <span class="trash text-red-500"
+                  ><span>
+                    <span class="remove-btn el-popover__reference"
+                      ><button type="button" @click="destroy(form.id)">
+                        Delete
+                      </button></span
                     ></span
                   ></span
                 >
@@ -150,6 +121,11 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters(["forms"]),
+  },
+  methods: {
+    destroy: function (id) {
+      this.$store.dispatch("DESTROY_FORM", id);
+    }
   },
   created() {
     this.$store.dispatch("FETCH_ALL_FORMS");

@@ -161,38 +161,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(["forms"])),
+  methods: {
+    destroy: function destroy(id) {
+      this.$store.dispatch("DESTROY_FORM", id);
+    }
+  },
   created: function created() {
     this.$store.dispatch("FETCH_ALL_FORMS");
   }
@@ -1050,30 +1026,65 @@ var actions = {
 
     return FETCH_ALL_FORMS;
   }(),
-  SET_EMPTY_FIELD: function SET_EMPTY_FIELD(_ref5, payload) {
-    var state = _ref5.state;
-    state.form.fields.unshift(payload);
-  },
-  SET_EMPTY_OPTION: function SET_EMPTY_OPTION(_ref6, payload) {
-    var state = _ref6.state;
-    state.form.fields[payload.key].options.unshift(payload.option);
-  },
-  REMOVE_OPTION_FROM_LIST: function () {
-    var _REMOVE_OPTION_FROM_LIST = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee4(_ref7, payload) {
-      var state, option, response;
+  DESTROY_FORM: function () {
+    var _DESTROY_FORM = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee4(_ref5, id) {
+      var dispatch, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              state = _ref7.state;
+              dispatch = _ref5.dispatch;
+              _context4.next = 3;
+              return jQuery.ajax({
+                type: "DELETE",
+                url: "/wp-json/dynamic-form/v1/forms",
+                data: {
+                  id: id
+                }
+              });
+
+            case 3:
+              response = _context4.sent;
+              dispatch("FETCH_ALL_FORMS");
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    function DESTROY_FORM(_x4, _x5) {
+      return _DESTROY_FORM.apply(this, arguments);
+    }
+
+    return DESTROY_FORM;
+  }(),
+  SET_EMPTY_FIELD: function SET_EMPTY_FIELD(_ref6, payload) {
+    var state = _ref6.state;
+    state.form.fields.unshift(payload);
+  },
+  SET_EMPTY_OPTION: function SET_EMPTY_OPTION(_ref7, payload) {
+    var state = _ref7.state;
+    state.form.fields[payload.key].options.unshift(payload.option);
+  },
+  REMOVE_OPTION_FROM_LIST: function () {
+    var _REMOVE_OPTION_FROM_LIST = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee5(_ref8, payload) {
+      var state, option, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              state = _ref8.state;
               option = state.form.fields[payload.key].options[payload.k];
 
               if (!(option && option.id != 0)) {
-                _context4.next = 6;
+                _context5.next = 6;
                 break;
               }
 
-              _context4.next = 5;
+              _context5.next = 5;
               return jQuery.ajax({
                 type: "DELETE",
                 url: "/wp-json/dynamic-form/v1/forms/fields/options",
@@ -1084,74 +1095,12 @@ var actions = {
               });
 
             case 5:
-              response = _context4.sent;
+              response = _context5.sent;
 
             case 6:
               state.form.fields[payload.key].options.splice(payload.k, 1);
 
             case 7:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-
-    function REMOVE_OPTION_FROM_LIST(_x4, _x5) {
-      return _REMOVE_OPTION_FROM_LIST.apply(this, arguments);
-    }
-
-    return REMOVE_OPTION_FROM_LIST;
-  }(),
-  STORE_FIELD: function () {
-    var _STORE_FIELD = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee5(_ref8, payload) {
-      var state, dispatch, field, option_ids, option_values, option_texts, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              state = _ref8.state, dispatch = _ref8.dispatch;
-              field = state.form.fields[payload];
-              _context5.next = 4;
-              return field.options.map(function (option) {
-                return option.id;
-              });
-
-            case 4:
-              option_ids = _context5.sent;
-              _context5.next = 7;
-              return field.options.map(function (option) {
-                return option.value;
-              });
-
-            case 7:
-              option_values = _context5.sent;
-              _context5.next = 10;
-              return field.options.map(function (option) {
-                return option.text;
-              });
-
-            case 10:
-              option_texts = _context5.sent;
-              field.option_ids = option_ids;
-              field.option_values = option_values;
-              field.option_texts = option_texts;
-              _context5.next = 16;
-              return jQuery.ajax({
-                type: "POST",
-                url: "/wp-json/dynamic-form/v1/forms/fields",
-                data: field,
-                dataType: "JSON"
-              });
-
-            case 16:
-              response = _context5.sent;
-
-              if (response) {
-                dispatch("SET_FORM", response.dynamic_form_id);
-              }
-
-            case 18:
             case "end":
               return _context5.stop();
           }
@@ -1159,14 +1108,14 @@ var actions = {
       }, _callee5);
     }));
 
-    function STORE_FIELD(_x6, _x7) {
-      return _STORE_FIELD.apply(this, arguments);
+    function REMOVE_OPTION_FROM_LIST(_x6, _x7) {
+      return _REMOVE_OPTION_FROM_LIST.apply(this, arguments);
     }
 
-    return STORE_FIELD;
+    return REMOVE_OPTION_FROM_LIST;
   }(),
-  UPDATE_FIELD: function () {
-    var _UPDATE_FIELD = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee6(_ref9, payload) {
+  STORE_FIELD: function () {
+    var _STORE_FIELD = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee6(_ref9, payload) {
       var state, dispatch, field, option_ids, option_values, option_texts, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee6$(_context6) {
         while (1) {
@@ -1200,7 +1149,7 @@ var actions = {
               field.option_texts = option_texts;
               _context6.next = 16;
               return jQuery.ajax({
-                type: "PUT",
+                type: "POST",
                 url: "/wp-json/dynamic-form/v1/forms/fields",
                 data: field,
                 dataType: "JSON"
@@ -1211,7 +1160,6 @@ var actions = {
 
               if (response) {
                 dispatch("SET_FORM", response.dynamic_form_id);
-                state.field = null;
               }
 
             case 18:
@@ -1222,28 +1170,91 @@ var actions = {
       }, _callee6);
     }));
 
-    function UPDATE_FIELD(_x8, _x9) {
+    function STORE_FIELD(_x8, _x9) {
+      return _STORE_FIELD.apply(this, arguments);
+    }
+
+    return STORE_FIELD;
+  }(),
+  UPDATE_FIELD: function () {
+    var _UPDATE_FIELD = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee7(_ref10, payload) {
+      var state, dispatch, field, option_ids, option_values, option_texts, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              state = _ref10.state, dispatch = _ref10.dispatch;
+              field = state.form.fields[payload];
+              _context7.next = 4;
+              return field.options.map(function (option) {
+                return option.id;
+              });
+
+            case 4:
+              option_ids = _context7.sent;
+              _context7.next = 7;
+              return field.options.map(function (option) {
+                return option.value;
+              });
+
+            case 7:
+              option_values = _context7.sent;
+              _context7.next = 10;
+              return field.options.map(function (option) {
+                return option.text;
+              });
+
+            case 10:
+              option_texts = _context7.sent;
+              field.option_ids = option_ids;
+              field.option_values = option_values;
+              field.option_texts = option_texts;
+              _context7.next = 16;
+              return jQuery.ajax({
+                type: "PUT",
+                url: "/wp-json/dynamic-form/v1/forms/fields",
+                data: field,
+                dataType: "JSON"
+              });
+
+            case 16:
+              response = _context7.sent;
+
+              if (response) {
+                dispatch("SET_FORM", response.dynamic_form_id);
+                state.field = null;
+              }
+
+            case 18:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    function UPDATE_FIELD(_x10, _x11) {
       return _UPDATE_FIELD.apply(this, arguments);
     }
 
     return UPDATE_FIELD;
   }(),
   REMOVE_FIELD: function () {
-    var _REMOVE_FIELD = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee7(_ref10, payload) {
+    var _REMOVE_FIELD = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee8(_ref11, payload) {
       var state, field, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee7$(_context7) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
-              state = _ref10.state;
+              state = _ref11.state;
               field = state.form.fields[payload];
 
               if (!(field && field.id != 0)) {
-                _context7.next = 6;
+                _context8.next = 6;
                 break;
               }
 
-              _context7.next = 5;
+              _context8.next = 5;
               return jQuery.ajax({
                 type: "DELETE",
                 url: "/wp-json/dynamic-form/v1/forms/fields",
@@ -1254,50 +1265,12 @@ var actions = {
               });
 
             case 5:
-              response = _context7.sent;
+              response = _context8.sent;
 
             case 6:
               state.form.fields.splice(payload, 1);
 
             case 7:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7);
-    }));
-
-    function REMOVE_FIELD(_x10, _x11) {
-      return _REMOVE_FIELD.apply(this, arguments);
-    }
-
-    return REMOVE_FIELD;
-  }(),
-  SAVE_DATA: function () {
-    var _SAVE_DATA = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee8(_ref11, payload) {
-      var commit, state, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              commit = _ref11.commit, state = _ref11.state;
-              _context8.next = 3;
-              return jQuery.ajax({
-                type: "POST",
-                url: "/wp-json/wp-vue/v1/users",
-                data: payload,
-                dataType: "JSON"
-              });
-
-            case 3:
-              response = _context8.sent;
-
-              if (response) {
-                state.changed = true;
-                _router__WEBPACK_IMPORTED_MODULE_6__["default"].push("/");
-              }
-
-            case 5:
             case "end":
               return _context8.stop();
           }
@@ -1305,14 +1278,14 @@ var actions = {
       }, _callee8);
     }));
 
-    function SAVE_DATA(_x12, _x13) {
-      return _SAVE_DATA.apply(this, arguments);
+    function REMOVE_FIELD(_x12, _x13) {
+      return _REMOVE_FIELD.apply(this, arguments);
     }
 
-    return SAVE_DATA;
+    return REMOVE_FIELD;
   }(),
-  UPDATE_DATA: function () {
-    var _UPDATE_DATA = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee9(_ref12, payload) {
+  SAVE_DATA: function () {
+    var _SAVE_DATA = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee9(_ref12, payload) {
       var commit, state, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee9$(_context9) {
         while (1) {
@@ -1321,7 +1294,7 @@ var actions = {
               commit = _ref12.commit, state = _ref12.state;
               _context9.next = 3;
               return jQuery.ajax({
-                type: "PUT",
+                type: "POST",
                 url: "/wp-json/wp-vue/v1/users",
                 data: payload,
                 dataType: "JSON"
@@ -1343,14 +1316,14 @@ var actions = {
       }, _callee9);
     }));
 
-    function UPDATE_DATA(_x14, _x15) {
-      return _UPDATE_DATA.apply(this, arguments);
+    function SAVE_DATA(_x14, _x15) {
+      return _SAVE_DATA.apply(this, arguments);
     }
 
-    return UPDATE_DATA;
+    return SAVE_DATA;
   }(),
-  SET_FORM: function () {
-    var _SET_FORM = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee10(_ref13, payload) {
+  UPDATE_DATA: function () {
+    var _UPDATE_DATA = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee10(_ref13, payload) {
       var commit, state, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee10$(_context10) {
         while (1) {
@@ -1359,11 +1332,9 @@ var actions = {
               commit = _ref13.commit, state = _ref13.state;
               _context10.next = 3;
               return jQuery.ajax({
-                type: "GET",
-                url: "/wp-json/dynamic-form/v1/forms/find",
-                data: {
-                  id: payload
-                },
+                type: "PUT",
+                url: "/wp-json/wp-vue/v1/users",
+                data: payload,
                 dataType: "JSON"
               });
 
@@ -1371,7 +1342,8 @@ var actions = {
               response = _context10.sent;
 
               if (response) {
-                commit("SETING_FORM", response);
+                state.changed = true;
+                _router__WEBPACK_IMPORTED_MODULE_6__["default"].push("/");
               }
 
             case 5:
@@ -1382,25 +1354,27 @@ var actions = {
       }, _callee10);
     }));
 
-    function SET_FORM(_x16, _x17) {
-      return _SET_FORM.apply(this, arguments);
+    function UPDATE_DATA(_x16, _x17) {
+      return _UPDATE_DATA.apply(this, arguments);
     }
 
-    return SET_FORM;
+    return UPDATE_DATA;
   }(),
-  UPDATE_FORM: function () {
-    var _UPDATE_FORM = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee11(_ref14, payload) {
-      var commit, response;
+  SET_FORM: function () {
+    var _SET_FORM = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee11(_ref14, payload) {
+      var commit, state, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee11$(_context11) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
-              commit = _ref14.commit;
+              commit = _ref14.commit, state = _ref14.state;
               _context11.next = 3;
               return jQuery.ajax({
-                type: "PUT",
-                url: "/wp-json/dynamic-form/v1/forms",
-                data: payload,
+                type: "GET",
+                url: "/wp-json/dynamic-form/v1/forms/find",
+                data: {
+                  id: payload
+                },
                 dataType: "JSON"
               });
 
@@ -1419,20 +1393,57 @@ var actions = {
       }, _callee11);
     }));
 
-    function UPDATE_FORM(_x18, _x19) {
+    function SET_FORM(_x18, _x19) {
+      return _SET_FORM.apply(this, arguments);
+    }
+
+    return SET_FORM;
+  }(),
+  UPDATE_FORM: function () {
+    var _UPDATE_FORM = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().mark(function _callee12(_ref15, payload) {
+      var commit, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_5___default().wrap(function _callee12$(_context12) {
+        while (1) {
+          switch (_context12.prev = _context12.next) {
+            case 0:
+              commit = _ref15.commit;
+              _context12.next = 3;
+              return jQuery.ajax({
+                type: "PUT",
+                url: "/wp-json/dynamic-form/v1/forms",
+                data: payload,
+                dataType: "JSON"
+              });
+
+            case 3:
+              response = _context12.sent;
+
+              if (response) {
+                commit("SETING_FORM", response);
+              }
+
+            case 5:
+            case "end":
+              return _context12.stop();
+          }
+        }
+      }, _callee12);
+    }));
+
+    function UPDATE_FORM(_x20, _x21) {
       return _UPDATE_FORM.apply(this, arguments);
     }
 
     return UPDATE_FORM;
   }(),
-  CHANGED_ACTION: function CHANGED_ACTION(_ref15, payload) {
-    var commit = _ref15.commit,
-        state = _ref15.state;
-    state.changed = payload;
-  },
-  CHANGED_ACTION_MESSAGE: function CHANGED_ACTION_MESSAGE(_ref16, payload) {
+  CHANGED_ACTION: function CHANGED_ACTION(_ref16, payload) {
     var commit = _ref16.commit,
         state = _ref16.state;
+    state.changed = payload;
+  },
+  CHANGED_ACTION_MESSAGE: function CHANGED_ACTION_MESSAGE(_ref17, payload) {
+    var commit = _ref17.commit,
+        state = _ref17.state;
     state.message = payload;
   }
 };
@@ -9066,8 +9077,8 @@ var render = function() {
           _c(
             "tbody",
             { staticClass: "bg-white divide-y divide-gray-200" },
-            _vm._l(_vm.forms, function(form) {
-              return _c("tr", { key: form.email }, [
+            _vm._l(_vm.forms, function(form, key) {
+              return _c("tr", { key: key }, [
                 _c("td", { staticClass: "px-3 whitespace-nowrap" }, [
                   _c("p", { staticClass: "text-lg font-semibold" }, [
                     _vm._v(_vm._s(form.title))
@@ -9123,7 +9134,32 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(1, true),
                     _vm._v(" "),
-                    _vm._m(2, true)
+                    _c("span", { staticClass: "trash text-red-500" }, [
+                      _c("span", [
+                        _c(
+                          "span",
+                          { staticClass: "remove-btn el-popover__reference" },
+                          [
+                            _c(
+                              "button",
+                              {
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.destroy(form.id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                      Delete\n                    "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -9258,69 +9294,6 @@ var staticRenderFns = [
     return _c("span", { staticClass: "ff_duplicate" }, [
       _c("a", { attrs: { href: "#" } }, [_vm._v(" Duplicate")]),
       _vm._v(" | ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "trash" }, [
-      _c("span", [
-        _c("span", [
-          _c(
-            "div",
-            {
-              staticClass: "el-popover el-popper",
-              staticStyle: { width: "160px", display: "none" },
-              attrs: {
-                role: "tooltip",
-                id: "el-popover-7217",
-                "aria-hidden": "true",
-                tabindex: "0"
-              }
-            },
-            [
-              _c("p", [_vm._v("Are you sure to delete this?")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticStyle: { "text-align": "right", margin: "0px" } },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "el-button el-button--text el-button--mini",
-                      attrs: { type: "button" }
-                    },
-                    [_c("span", [_vm._v("cancel")])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "el-button el-button--primary el-button--mini",
-                      attrs: { type: "button" }
-                    },
-                    [_c("span", [_vm._v("confirm")])]
-                  )
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "el-popover__reference-wrapper" })
-        ]),
-        _vm._v(" "),
-        _c(
-          "span",
-          {
-            staticClass: "remove-btn el-popover__reference",
-            attrs: { "aria-describedby": "el-popover-7217", tabindex: "0" }
-          },
-          [_c("a", [_vm._v("Delete")])]
-        )
-      ])
     ])
   }
 ]

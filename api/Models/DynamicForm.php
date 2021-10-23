@@ -193,13 +193,33 @@ class DynamicForm
     public function destroy_many($ids = [])
     {
         global $wpdb;
+        $form_field_table = FORM_FIELD;
+        $field_option_table = FIELD_OPTION;
+
         $ids = implode(",", array_filter($ids, fn ($id) => !is_null($id) && $id != ''));
-        return $wpdb->query("DELETE FROM $this->table WHERE id IN($ids)");
+
+        $sql = "DELETE $this->table AS A, $form_field_table AS B , $field_option_table AS C
+            FROM A
+                INNER JOIN B
+                    ON B.dynamic_form_id=A.id
+                LEFT JOIN C
+                    ON C.form_field_id=B.id
+            WHERE A.id IN($ids)
+        ";
+        return $wpdb->query($sql);
     }
 
     public function destroy($id)
     {
         global $wpdb;
+        $form_field_table = FORM_FIELD;
+        $field_option_table = FIELD_OPTION;
+
+        $rows = $wpdb->get_results("SELECT * FROM $form_field_table WHERE dynamic_form_id=$id");
+        foreach ($rows as $row) {
+            $wpdb->delete($field_option_table, ['form_field_id' => $row->id]);
+            $wpdb->delete($form_field_table, ['id' => $row->id]);
+        }
         return $wpdb->delete($this->table, ['id' => $id]);
     }
 }
