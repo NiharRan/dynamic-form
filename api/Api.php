@@ -12,6 +12,7 @@ class Api
     public function register_routes()
     {
         (new FormApi)->register_routes();
+        (new FormEntryApi)->register_routes();
         (new ShortcodeApi)->register_routes();
     }
 }

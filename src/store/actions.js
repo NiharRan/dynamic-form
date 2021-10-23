@@ -40,6 +40,15 @@ export const actions = {
     }
   },
 
+  DESTROY_FORM: async function({ dispatch }, id) {
+    const response = await jQuery.ajax({
+      type: "DELETE",
+      url: "/wp-json/dynamic-form/v1/forms",
+      data: { id },
+    });
+    dispatch("FETCH_ALL_FORMS");
+  },
+
   SET_EMPTY_FIELD: function({ state }, payload) {
     state.form.fields.unshift(payload);
   },

@@ -17,6 +17,7 @@
 
 use DynamicForm\Api\Api;
 use DynamicForm\Api\Includes\AdminPanel;
+use DynamicForm\Api\Includes\FrontendPanel;
 use DynamicForm\Api\Models\DynamicForm;
 
 require_once "vendor/autoload.php";
@@ -44,8 +45,9 @@ class Dynamic_Form
 
     public function add_form_shortcode($attr)
     {
+        $shortcode = '[' . FORM_SHORTCODE . ' code="' . $attr['code'] . '"]';
         ob_start();
-        $data['form'] = (new DynamicForm)->find_one(['shortcode' => $attr['code']]);
+        $data['form'] = (new DynamicForm)->find_one(['shortcode' => $shortcode]);
         extract($data);
         require_once DYN_FORM_VIEW_DIR . "shortcodes/form.php";
         return ob_get_clean();
@@ -56,10 +58,11 @@ class Dynamic_Form
     {
         global $wpdb;
         define("DYN_FORM_VERSION", $this->version);
-        define("DYNAMIC_FORM", $wpdb->prefix . 'dynamic_form');
-        define("FORM_FIELD", $wpdb->prefix . 'form_fields');
-        define("FIELD_TYPE", $wpdb->prefix . 'field_types');
-        define("FIELD_OPTION", $wpdb->prefix . 'field_options');
+        define("DYNAMIC_FORM", $wpdb->prefix . 'dynamic_forms');
+        define("FORM_FIELD", $wpdb->prefix . 'dynamic_form_fields');
+        define("FIELD_TYPE", $wpdb->prefix . 'dynamic_field_types');
+        define("FIELD_OPTION", $wpdb->prefix . 'dynamic_field_options');
+        define("FORM_ENTRIE", $wpdb->prefix . 'dynamic_form_entries');
 
 
         define("FORM_SHORTCODE", "dynamicform");
@@ -165,12 +168,25 @@ class Dynamic_Form
             PRIMARY KEY  (id)
         )";
         dbDelta($sql);
+
+        $table_name = FORM_ENTRIE;
+        // need to create the table for plugin
+        $sql = "CREATE TABLE $table_name (
+            id int(11) NOT NULL AUTO_INCREMENT,
+            dynamic_form_id INT NOT NULL,
+            field_name VARCHAR(100) NOT NULL,
+            field_value VARCHAR(100) NOT NULL,
+
+            PRIMARY KEY  (id)
+        )";
+        dbDelta($sql);
     }
 
 
     public function init_plugin()
     {
         new AdminPanel();
+        new FrontendPanel();
         new Api();
     }
 
