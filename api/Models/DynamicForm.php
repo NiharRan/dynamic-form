@@ -19,8 +19,9 @@ class DynamicForm
         global $wpdb;
         $shortcode = '';
         while (true) {
+            $shortcode = FORM_SHORTCODE;
             $rand = (new RandomStringGenerator)->generate(5);
-            $shortcode = "FORM-$rand";
+            $shortcode = "$shortcode code=$rand";
             $result = $wpdb->get_row("SELECT * FROM $this->table WHERE shortcode='$shortcode'");
             if (!$result) {
                 break;
@@ -44,9 +45,8 @@ class DynamicForm
             'slug' => $slug,
             'shortcode' => $this->get_unique_shortcode(),
             'classes' => '',
-            'action' => '',
             'form_id' => "form-$id",
-            'has_file_upload' => false
+
         ];
         $result = $wpdb->insert($this->table, $data);
 
@@ -154,7 +154,39 @@ class DynamicForm
         global $wpdb;
         $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $this->table WHERE id=%d", $id));
 
-        $row->fields = (new FormField)->form_fields($id);
+        $fields = (new FormField)->form_fields($id);
+        foreach ($fields as $key => $field) {
+            $fields[$key]->options = (new FieldOption)->field_options($field->id);
+        }
+        $row->fields = $fields;
+        return $row;
+    }
+
+    public function find_one($params = [])
+    {
+        global $wpdb;
+
+
+        $condition = '';
+        if (isset($params['shortcode']) && $params['shortcode'] != '') {
+            $shortcode = $params['shortcode'];
+            $condition .= " shortcode='$shortcode' AND";
+        }
+
+        $condition = rtrim($condition, " AND");
+        if ($condition != '') {
+            $condition = "WHERE $condition";
+        }
+
+        $sql = "SELECT * FROM $this->table $condition";
+
+        $row = $wpdb->get_row($sql);
+
+        $fields = (new FormField)->form_fields($row->id);
+        foreach ($fields as $key => $field) {
+            $fields[$key]->options = (new FieldOption)->field_options($field->id);
+        }
+        $row->fields = $fields;
         return $row;
     }
 

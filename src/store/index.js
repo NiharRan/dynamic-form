@@ -13,6 +13,7 @@ export default new Vuex.Store({
     forms: [],
     form: null,
     field: null,
+    select: null,
   },
   actions,
   getters,

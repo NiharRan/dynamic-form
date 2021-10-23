@@ -3,4 +3,5 @@ export const getters = {
   forms: (state) => state.forms,
   form: (state) => state.form,
   field: (state) => state.field,
+  select: (state) => state.select,
 };

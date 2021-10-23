@@ -4,7 +4,7 @@
       All Forms
       <router-link
         to="/new-form"
-        class="px-4 py-2 mt-5 bg-indigo-600 text-white font-bold rounded-md hover:text-white hover:bg-indigo-500 transition-all delay-300 ease-in-out"
+        class="px-4 py-2 mt-5 bg-indigo-500 text-white font-bold rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
       >
         Create New Form
       </router-link>
@@ -15,60 +15,118 @@
           <tr>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Title
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Shortcode
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Classes
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               ID
             </th>
             <th
               scope="col"
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Status
-            </th>
-            <th scope="col" class="relative px-6 py-3">
-              <span class="sr-only">Edit</span>
             </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="form in forms" :key="form.email">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <h1>{{ form.title }}</h1>
-              <p
-                class="border bg-gray-100 px-1 font-semibold inline-block rounded"
-              >
-                {{ form.slug }}
-              </p>
+            <td class="px-3 whitespace-nowrap">
+              <p class="text-lg font-semibold">{{ form.title }}</p>
+              <div class="row-actions">
+                <span class="ff_edit"
+                  ><router-link :to="`/edit-form/${form.id}`">
+                    Edit</router-link
+                  >
+                  |
+                </span>
+                <span class="ff_entries"
+                  ><router-link :to="`/entries/${form.id}`">
+                    Entries</router-link
+                  >
+                  |
+                </span>
+                <!---->
+                <span class="ff_entries"
+                  ><router-link
+                    target="_blank"
+                    :to="`/preview-form/${form.id}`"
+                  >
+                    Preview</router-link
+                  >
+                  |
+                </span>
+                <span class="ff_duplicate"><a href="#"> Duplicate</a> | </span>
+                <span class="trash"
+                  ><span
+                    ><span
+                      ><div
+                        role="tooltip"
+                        id="el-popover-7217"
+                        aria-hidden="true"
+                        class="el-popover el-popper"
+                        tabindex="0"
+                        style="width: 160px; display: none;"
+                      >
+                        <!---->
+                        <p>Are you sure to delete this?</p>
+                        <div style="text-align: right; margin: 0px;">
+                          <button
+                            type="button"
+                            class="el-button el-button--text el-button--mini"
+                          >
+                            <!----><!----><span>cancel</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="el-button el-button--primary el-button--mini"
+                          >
+                            <!----><!----><span>confirm</span>
+                          </button>
+                        </div>
+                      </div>
+                      <span class="el-popover__reference-wrapper"></span
+                    ></span>
+                    <span
+                      class="remove-btn el-popover__reference"
+                      aria-describedby="el-popover-7217"
+                      tabindex="0"
+                      ><a>Delete</a></span
+                    ></span
+                  ></span
+                >
+              </div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              {{ form.shortcode }}
+            <td class="px-3 whitespace-nowrap">
+              <span
+                class="border border-gray-300 px-2 py-1 rounded bg-gray-100"
+                >{{ form.shortcode }}</span
+              >
             </td>
 
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 whitespace-nowrap text-sm text-gray-500">
               {{ form.classes }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 whitespace-nowrap text-sm text-gray-500">
               {{ form.form_id }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-3 whitespace-nowrap">
               <span
                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                 :class="[
@@ -79,15 +137,6 @@
               >
                 {{ form.status == 1 ? "Active" : "Inactive" }}
               </span>
-            </td>
-            <td
-              class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-            >
-              <router-link
-                :to="`/edit-form/${form.id}`"
-                class="px-4 py-2 bg-purple-600 text-white font-bold rounded-md hover:text-white hover:bg-purple-500 transition-all delay-300 ease-in-out"
-                >Edit</router-link
-              >
             </td>
           </tr>
         </tbody>

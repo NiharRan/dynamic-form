@@ -17,6 +17,7 @@
 
 use DynamicForm\Api\Api;
 use DynamicForm\Api\Includes\AdminPanel;
+use DynamicForm\Api\Models\DynamicForm;
 
 require_once "vendor/autoload.php";
 
@@ -29,9 +30,25 @@ class Dynamic_Form
     public function __construct()
     {
         $this->register_constants();
+        $this->register_shortcodes();
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deativate']);
         add_action("plugin_loaded", [$this, "init_plugin"]);
+    }
+
+
+    public function register_shortcodes()
+    {
+        add_shortcode(FORM_SHORTCODE, [$this, "add_form_shortcode"]);
+    }
+
+    public function add_form_shortcode($attr)
+    {
+        ob_start();
+        $data['form'] = (new DynamicForm)->find_one(['shortcode' => $attr['code']]);
+        extract($data);
+        require_once DYN_FORM_VIEW_DIR . "shortcodes/form.php";
+        return ob_get_clean();
     }
 
 
@@ -44,10 +61,12 @@ class Dynamic_Form
         define("FIELD_TYPE", $wpdb->prefix . 'field_types');
         define("FIELD_OPTION", $wpdb->prefix . 'field_options');
 
+
+        define("FORM_SHORTCODE", "dynamicform");
+
         define("DYN_FORM_PLUGIN_URL", trailingslashit(plugin_dir_url(__FILE__)));
         define("DYN_FORM_PLUGIN_DIR", trailingslashit(plugin_dir_url(__FILE__)));
         define("DYN_FORM_VIEW_DIR", trailingslashit(plugin_dir_path(__FILE__) . "views"));
-
     }
 
     public function activate()
@@ -95,9 +114,7 @@ class Dynamic_Form
             slug VARCHAR(110) NOT NULL,
             shortcode VARCHAR(50) NOT NULL,
             classes VARCHAR(100) NULL,
-            action VARCHAR(100) NULL,
             form_id VARCHAR(100) NULL,
-            has_file_upload TINYINT(4) DEFAULT 0,
             status TINYINT(4) DEFAULT 1,
 
             PRIMARY KEY  (id)
@@ -116,6 +133,8 @@ class Dynamic_Form
             width VARCHAR(20) NULL,
             height VARCHAR(20) NULL,
             type VARCHAR(20) NULL,
+            input_type VARCHAR(20) NULL,
+            rows int(11) DEFAULT 4,
             is_required TINYINT(4) DEFAULT 0,
             status TINYINT(4) DEFAULT 1,
 
@@ -139,7 +158,8 @@ class Dynamic_Form
         $sql = "CREATE TABLE $table_name (
             id int(11) NOT NULL AUTO_INCREMENT,
             form_field_id INT NOT NULL,
-            name VARCHAR(100) NOT NULL,
+            value VARCHAR(100) NOT NULL,
+            text VARCHAR(100) NOT NULL,
             status TINYINT(4) DEFAULT 1,
 
             PRIMARY KEY  (id)
