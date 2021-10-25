@@ -174,8 +174,7 @@ class Dynamic_Form
         $sql = "CREATE TABLE $table_name (
             id int(11) NOT NULL AUTO_INCREMENT,
             dynamic_form_id INT NOT NULL,
-            field_name VARCHAR(100) NOT NULL,
-            field_value VARCHAR(100) NOT NULL,
+            data TEXT NOT NULL,
 
             PRIMARY KEY  (id)
         )";

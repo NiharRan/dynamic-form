@@ -14,6 +14,7 @@ export default new Vuex.Store({
     form: null,
     field: null,
     select: null,
+    entries: [],
   },
   actions,
   getters,

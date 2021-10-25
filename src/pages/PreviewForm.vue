@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="bg-white shadow-lg p-4 w-full m-auto">
-      <h1 class="mb-4">
-        Preview Form
+      <h1 class="flex justify-between items-center">
+        <span>Preview Form</span>
         <router-link
           to="/"
-          class="px-4 py-2 mt-5 bg-indigo-500 text-white font-bold rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
+          class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
         >
           Back
         </router-link>
