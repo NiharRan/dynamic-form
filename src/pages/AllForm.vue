@@ -17,37 +17,37 @@
           <tr>
             <th
               scope="col"
-              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Title
             </th>
             <th
               scope="col"
-              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Shortcode
             </th>
-            <th
+            <th 
               scope="col"
-              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Classes
             </th>
             <th
               scope="col"
-              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               ID
             </th>
             <th
               scope="col"
-              class="px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 py-1 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Entries
             </th>
             <th
               scope="col"
-              class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Status
             </th>
@@ -55,7 +55,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="(form, key) in forms" :key="key">
-            <td class="px-3 whitespace-nowrap">
+            <td class="px-3 py-1 whitespace-nowrap">
               <p class="text-lg font-semibold">{{ form.title }}</p>
               <div class="row-actions">
                 <span class="ff_edit"
@@ -92,25 +92,25 @@
                 >
               </div>
             </td>
-            <td class="px-3 whitespace-nowrap">
+            <td class="px-3 py-1 whitespace-nowrap">
               <span
                 class="border border-gray-300 px-2 py-1 rounded bg-gray-100"
                 >{{ form.shortcode }}</span
               >
             </td>
 
-            <td class="px-3 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 py-1 whitespace-nowrap text-sm text-gray-500">
               {{ form.classes }}
             </td>
-            <td class="px-3 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 py-1 whitespace-nowrap text-sm text-gray-500">
               {{ form.form_id }}
             </td>
             <th
-              class="px-3 whitespace-nowrap text-center text-sm text-gray-500"
+              class="px-3 py-1 whitespace-nowrap text-center text-sm text-gray-500"
             >
               {{ form.total_entries }}
             </th>
-            <td class="px-3 whitespace-nowrap">
+            <td class="px-3 py-1 whitespace-nowrap">
               <span
                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                 :class="[

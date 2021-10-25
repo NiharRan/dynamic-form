@@ -9793,7 +9793,7 @@ var render = function() {
             { staticClass: "bg-white divide-y divide-gray-200" },
             _vm._l(_vm.forms, function(form, key) {
               return _c("tr", { key: key }, [
-                _c("td", { staticClass: "px-3 whitespace-nowrap" }, [
+                _c("td", { staticClass: "px-3 py-1 whitespace-nowrap" }, [
                   _c("p", { staticClass: "text-lg font-semibold" }, [
                     _vm._v(_vm._s(form.title))
                   ]),
@@ -9877,7 +9877,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("td", { staticClass: "px-3 whitespace-nowrap" }, [
+                _c("td", { staticClass: "px-3 py-1 whitespace-nowrap" }, [
                   _c(
                     "span",
                     {
@@ -9891,7 +9891,8 @@ var render = function() {
                 _c(
                   "td",
                   {
-                    staticClass: "px-3 whitespace-nowrap text-sm text-gray-500"
+                    staticClass:
+                      "px-3 py-1 whitespace-nowrap text-sm text-gray-500"
                   },
                   [
                     _vm._v(
@@ -9903,7 +9904,8 @@ var render = function() {
                 _c(
                   "td",
                   {
-                    staticClass: "px-3 whitespace-nowrap text-sm text-gray-500"
+                    staticClass:
+                      "px-3 py-1 whitespace-nowrap text-sm text-gray-500"
                   },
                   [
                     _vm._v(
@@ -9916,7 +9918,7 @@ var render = function() {
                   "th",
                   {
                     staticClass:
-                      "px-3 whitespace-nowrap text-center text-sm text-gray-500"
+                      "px-3 py-1 whitespace-nowrap text-center text-sm text-gray-500"
                   },
                   [
                     _vm._v(
@@ -9927,7 +9929,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c("td", { staticClass: "px-3 whitespace-nowrap" }, [
+                _c("td", { staticClass: "px-3 py-1 whitespace-nowrap" }, [
                   _c(
                     "span",
                     {
@@ -9968,7 +9970,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              "px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
             attrs: { scope: "col" }
           },
           [_vm._v("\n            Title\n          ")]
@@ -9978,7 +9980,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              "px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
             attrs: { scope: "col" }
           },
           [_vm._v("\n            Shortcode\n          ")]
@@ -9988,7 +9990,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              "px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
             attrs: { scope: "col" }
           },
           [_vm._v("\n            Classes\n          ")]
@@ -9998,7 +10000,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              "px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
             attrs: { scope: "col" }
           },
           [_vm._v("\n            ID\n          ")]
@@ -10008,7 +10010,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider",
+              "px-3 py-1 text-center text-xs font-medium text-gray-500 uppercase tracking-wider",
             attrs: { scope: "col" }
           },
           [_vm._v("\n            Entries\n          ")]
@@ -10018,7 +10020,7 @@ var staticRenderFns = [
           "th",
           {
             staticClass:
-              "px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              "px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
             attrs: { scope: "col" }
           },
           [_vm._v("\n            Status\n          ")]
