@@ -38,7 +38,7 @@ class FormField
             'type' => $params['type'],
             'input_type' => $params['input_type'],
             'rows' => $params['rows'],
-            'is_required' => $params['is_required']  ? 1 : 0,
+            'is_required' => $params['is_required'] == "true" ? 1 : 0,
             'dynamic_form_id' => $params['dynamic_form_id'],
         ];
         $wpdb->insert($this->table, $data);
@@ -75,7 +75,7 @@ class FormField
             'type' => $params['type'],
             'input_type' => $params['input_type'],
             'rows' => $params['rows'],
-            'is_required' => $params['is_required'] ? 1 : 0,
+            'is_required' => $params['is_required'] == "true" ? 1 : 0,
             'dynamic_form_id' => $params['dynamic_form_id'],
         ];
         $wpdb->update($this->table, $data, ['id' => $params['id']]);

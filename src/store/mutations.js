@@ -8,4 +8,7 @@ export const mutations = {
   SETING_FORM: (state, payload) => {
     state.form = payload;
   },
+  UPDATE_ENTRIES: (state, payload) => {
+    state.entries = payload;
+  },
 };

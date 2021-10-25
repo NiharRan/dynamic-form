@@ -21,7 +21,7 @@ class DynamicForm
         while (true) {
             $shortcode = FORM_SHORTCODE;
             $rand = (new RandomStringGenerator)->generate(5);
-            $shortcode = "$shortcode code=$rand";
+            $shortcode = '[' . $shortcode . ' code="' . $rand . '"]';
             $result = $wpdb->get_row("SELECT * FROM $this->table WHERE shortcode='$shortcode'");
             if (!$result) {
                 break;
@@ -96,22 +96,23 @@ class DynamicForm
     public function get_filter_forms($params = [])
     {
         global $wpdb;
-        $sql = "SELECT * FROM $this->table";
+        $form_entry_table = FORM_ENTRIE;
+        $sql = "SELECT A.*, COUNT(B.id) AS total_entries FROM $this->table A LEFT JOIN $form_entry_table B ON B.dynamic_form_id=A.id";
         $condition = '';
         if (isset($params['id']) && $params['id'] != '') {
-            $condition .= "id=" . $params['id'] . " AND ";
+            $condition .= "A.id=" . $params['id'] . " AND ";
         }
         if (isset($params['name']) && $params['name'] != '') {
-            $condition .= "name LIKE '%" . $params['name'] . "%' AND ";
+            $condition .= "A.name LIKE '%" . $params['name'] . "%' AND ";
         }
         if (isset($params['email']) && $params['email'] != '') {
-            $condition .= "email LIKE '%" . $params['email'] . "%' AND ";
+            $condition .= "A.email LIKE '%" . $params['email'] . "%' AND ";
         }
         if (isset($params['role']) && $params['role'] != '') {
-            $condition .= "role='" . $params['role'] . "' AND ";
+            $condition .= "A.role='" . $params['role'] . "' AND ";
         }
         if (isset($params['status']) && $params['status'] != '') {
-            $condition .= "status=" . $params['status'] . " AND ";
+            $condition .= "A.status=" . $params['status'] . " AND ";
         }
 
         if ($condition != '') {
@@ -120,8 +121,7 @@ class DynamicForm
 
         $condition = rtrim($condition, " AND ");
         $sql .= $condition;
-        $sql .= " ORDER BY id DESC";
-
+        $sql .= " GROUP BY A.id ORDER BY A.id DESC";
         return $wpdb->get_results($sql);
     }
 

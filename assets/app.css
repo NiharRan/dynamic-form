@@ -775,6 +775,9 @@ select {
 .mt-4 {
 	margin-top: 1rem;
 }
+.mt-2 {
+	margin-top: 0.5rem;
+}
 .block {
 	display: block;
 }
@@ -816,6 +819,9 @@ select {
 }
 .justify-center {
 	justify-content: center;
+}
+.justify-between {
+	justify-content: space-between;
 }
 .gap-4 {
 	gap: 1rem;
@@ -992,6 +998,10 @@ select {
 .text-red-500 {
 	--tw-text-opacity: 1;
 	color: rgba(239, 68, 68, var(--tw-text-opacity));
+}
+.text-red-600 {
+	--tw-text-opacity: 1;
+	color: rgba(220, 38, 38, var(--tw-text-opacity));
 }
 .shadow-lg {
 	--tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);

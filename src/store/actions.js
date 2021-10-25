@@ -174,6 +174,18 @@ export const actions = {
     }
   },
 
+  FETCH_ALL_ENTRIES: async function({ commit }, payload) {
+    const response = await jQuery.ajax({
+      type: "GET",
+      url: `/wp-json/dynamic-form/v1/entries`,
+      data: { id: payload },
+      dataType: "JSON",
+    });
+    if (response) {
+      commit("UPDATE_ENTRIES", response);
+    }
+  },
+
   CHANGED_ACTION: function({ commit, state }, payload) {
     state.changed = payload;
   },

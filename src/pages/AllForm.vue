@@ -1,15 +1,17 @@
 <template>
   <div class="bg-white shadow-lg p-4 w-full m-auto">
-    <h1 class="mb-4">
-      All Forms
+    <h1 class="flex justify-between items-center">
+      <span>All Forms</span>
       <router-link
         to="/new-form"
-        class="px-4 py-2 mt-5 bg-indigo-500 text-white font-bold rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
+        class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
       >
         Create New Form
       </router-link>
     </h1>
-    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+    <div
+      class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4"
+    >
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -36,6 +38,12 @@
               class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               ID
+            </th>
+            <th
+              scope="col"
+              class="px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Entries
             </th>
             <th
               scope="col"
@@ -97,6 +105,11 @@
             <td class="px-3 whitespace-nowrap text-sm text-gray-500">
               {{ form.form_id }}
             </td>
+            <th
+              class="px-3 whitespace-nowrap text-center text-sm text-gray-500"
+            >
+              {{ form.total_entries }}
+            </th>
             <td class="px-3 whitespace-nowrap">
               <span
                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
@@ -123,9 +136,9 @@ export default {
     ...mapGetters(["forms"]),
   },
   methods: {
-    destroy: function (id) {
+    destroy: function(id) {
       this.$store.dispatch("DESTROY_FORM", id);
-    }
+    },
   },
   created() {
     this.$store.dispatch("FETCH_ALL_FORMS");

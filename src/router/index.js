@@ -11,7 +11,7 @@ const routes = [
   { path: "/new-form", component: NewForm },
   { path: "/edit-form/:id", component: EditForm },
   { path: "/preview-form/:id", component: PreviewForm },
-  { path: "/entries", component: Entries },
+  { path: "/entries/:id", component: Entries },
 ];
 
 const router = new VueRouter({

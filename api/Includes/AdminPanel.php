@@ -61,7 +61,6 @@ class AdminPanel
         if (current_user_can($capability)) {
             $submenu[$slug]['/'] = ['All Forms', $capability, "admin.php?page=$slug#/"];
             $submenu[$slug]['new-form'] = ['New Form', $capability, "admin.php?page=$slug#/new-form"];
-            $submenu[$slug]['entries'] = ['Entries', $capability, "admin.php?page=$slug#/entries"];
         }
     }
 

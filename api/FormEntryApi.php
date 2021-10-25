@@ -5,6 +5,7 @@ namespace DynamicForm\Api;
 use DynamicForm\Api\Models\FormEntry;
 use WP_REST_Controller;
 use WP_REST_Request;
+use WP_REST_Response;
 use WP_REST_Server;
 
 class FormEntryApi extends WP_REST_Controller
@@ -21,10 +22,16 @@ class FormEntryApi extends WP_REST_Controller
     {
         register_rest_route(
             $this->namespace,
-            '/forms/entries',
+            '/entries',
             [
                 [
-                    'method' => WP_REST_Server::CREATABLE,
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => [$this, 'fetch_all'],
+                    'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
+                    'args' => $this->get_collection_params()
+                ],
+                [
+                    'methods' => WP_REST_Server::CREATABLE,
                     'callback' => [$this, 'store'],
                     'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
                     'args' => $this->get_collection_params()
@@ -33,11 +40,22 @@ class FormEntryApi extends WP_REST_Controller
         );
     }
 
+    public function fetch_all(WP_REST_Request $request)
+    {
+        $params = $request->get_params();
+        $rows = $this->form_entry->fetch_all($params);
+        foreach ($rows as $key => $row) {
+            $rows[$key]->data = json_decode($row->data);
+        }
+
+        return new WP_REST_Response($rows);
+    }
 
     public function store(WP_REST_Request $request)
     {
         $params = $request->get_params();
-        dd($params);
+        $result = $this->form_entry->store($params);
+        return new WP_REST_Response($result);
     }
 
 

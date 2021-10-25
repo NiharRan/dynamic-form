@@ -13,7 +13,14 @@ if (isset($form)) { ?>
                     if (isset($form->fields) && count($form->fields) > 0) {
                         foreach ($form->fields as $key => $field) { ?>
                             <div class="w-full my-4">
-                                <label class="block" for="<?php echo $field->field_id; ?>"><?php echo $field->label; ?></label>
+                                <label class="block" for="<?php echo $field->field_id; ?>">
+                                    <?php echo $field->label; ?>
+                                    <?php
+                                    if ($field->is_required == 1) { ?>
+                                        <span class="text-red-600 font-bold">*</span>
+                                    <?php }
+                                    ?>
+                                </label>
 
                                 <?php
                                 if (
@@ -21,12 +28,12 @@ if (isset($form)) { ?>
                                     $field->input_type != 'checkbox' &&
                                     $field->input_type != 'radio'
                                 ) { ?>
-                                    <input type="<?php echo $field->input_type; ?>" class="w-full" name="<?php echo $field->name; ?>" id="<?php echo $field->field_id; ?>" placeholder="<?php echo $field->placeholder; ?>" style="width: <?php echo $field->width; ?>; height: <?php echo $field->height; ?>" />
+                                    <input type="<?php echo $field->input_type; ?>" <?php echo $field->is_required == 1 ? 'required' : ''; ?> class="w-full" name="<?php echo $field->name; ?>" id="<?php echo $field->field_id; ?>" placeholder="<?php echo $field->placeholder; ?>" style="width: <?php echo $field->width; ?>; height: <?php echo $field->height; ?>" />
                                 <?php }
                                 ?>
 
                                 <?php if ($field->type == 'textarea') { ?>
-                                    <textarea rows="<?php echo $field->rows; ?>" class="w-full border border-gray-400 rounded" name="<?php echo $field->name; ?>" id="<?php echo $field->field_id; ?>" placeholder="<?php echo $field->placeholder; ?>" style="width: <?php echo $field->width; ?>; height: <?php echo $field->height; ?>"></textarea>
+                                    <textarea rows="<?php echo $field->rows; ?>" <?php echo $field->is_required == 1 ? 'required' : ''; ?> class="w-full border border-gray-400 rounded" name="<?php echo $field->name; ?>" id="<?php echo $field->field_id; ?>" placeholder="<?php echo $field->placeholder; ?>" style="width: <?php echo $field->width; ?>; height: <?php echo $field->height; ?>"></textarea>
                                 <?php } ?>
 
 
@@ -59,7 +66,7 @@ if (isset($form)) { ?>
                                 <?php } ?>
 
                                 <?php if ($field->type == 'select') { ?>
-                                    <select class="w-full min-w-full" name="<?php echo $field->name; ?>" id="<?php echo $field->field_id; ?>" style="width: <?php echo $field->width; ?>;height: <?php echo $field->height; ?>">
+                                    <select class="w-full min-w-full" <?php echo $field->is_required == 1 ? 'required' : ''; ?> name="<?php echo $field->name; ?>[]" id="<?php echo $field->field_id; ?>" style="width: <?php echo $field->width; ?>;height: <?php echo $field->height; ?>">
                                         <option value="">Select ...</option>
                                         <?php
                                         if (isset($field->options) && count($field->options) > 0) {
@@ -92,11 +99,11 @@ if (isset($form)) { ?>
                 const data = $(this).serialize();
                 $.ajax({
                     type: "POST",
-                    url: '/wp-json/dynamic-form/v1/forms/entries',
+                    url: '/wp-json/dynamic-form/v1/entries',
                     data: data,
                     dataType: 'JSON',
-                    success: function (response) {
-                        console.log(response);
+                    success: function(response) {
+                        window.location.reload()
                     }
                 });
             });
