@@ -45,7 +45,7 @@ class Dynamic_Form
 
     public function add_form_shortcode($attr)
     {
-        $shortcode = '[' . FORM_SHORTCODE . ' code="' . $attr['code'] . '"]';
+        $shortcode = '[' . FORM_SHORTCODE . ' id="' . $attr['id'] . '"]';
         ob_start();
         $data['form'] = (new DynamicForm)->find_one(['shortcode' => $shortcode]);
         extract($data);

@@ -13,7 +13,7 @@
 
       <div class="w-6/12 mx-auto border p-4 rounded">
         <h1 class="text-center">
-          {{ form.title }} <span class="border border-gray-300 px-2 py-1 rounded bg-gray-100">["{{ form.shortcode }}"]</span>
+          {{ form.title }} <span class="border border-gray-300 px-2 py-1 rounded bg-gray-100">{{ form.shortcode }}</span>
         </h1>
         <div v-if="form && form.fields">
           <div

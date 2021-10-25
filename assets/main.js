@@ -11231,7 +11231,7 @@ var render = function() {
               staticClass:
                 "border border-gray-300 px-2 py-1 rounded bg-gray-100"
             },
-            [_vm._v('["' + _vm._s(_vm.form.shortcode) + '"]')]
+            [_vm._v(_vm._s(_vm.form.shortcode))]
           )
         ]),
         _vm._v(" "),

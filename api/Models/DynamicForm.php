@@ -14,24 +14,6 @@ class DynamicForm
     }
 
 
-    public function get_unique_shortcode()
-    {
-        global $wpdb;
-        $shortcode = '';
-        while (true) {
-            $shortcode = FORM_SHORTCODE;
-            $rand = (new RandomStringGenerator)->generate(5);
-            $shortcode = '[' . $shortcode . ' code="' . $rand . '"]';
-            $result = $wpdb->get_row("SELECT * FROM $this->table WHERE shortcode='$shortcode'");
-            if (!$result) {
-                break;
-            }
-        }
-
-        return $shortcode;
-    }
-
-
 
     public function create_empty_form()
     {
@@ -43,7 +25,7 @@ class DynamicForm
         $data = [
             'title' => $title,
             'slug' => $slug,
-            'shortcode' => $this->get_unique_shortcode(),
+            'shortcode' => '',
             'classes' => '',
             'form_id' => "form-$id",
 
@@ -52,6 +34,10 @@ class DynamicForm
 
         if ($result) {
             $last_id = $wpdb->insert_id;
+            $wpdb->update($this->table, [
+                'shortcode' => '[' . FORM_SHORTCODE . ' id="' . $last_id . '"]'
+            ], ['id' => $last_id]);
+
             $row = $this->find($last_id);
             return new WP_REST_Response($row);
         }
