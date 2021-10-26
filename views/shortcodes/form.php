@@ -1,6 +1,14 @@
 <?php
 
 if (isset($form)) { ?>
+<style>
+    .site-title,
+    .site-description,
+    .post,
+    .entry-title {
+        display: none;
+    }
+</style>
     <div>
         <div class="bg-white shadow-lg p-4 w-full m-auto">
             <div class="border p-4 rounded">

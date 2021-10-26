@@ -37,12 +37,6 @@ class FormApi extends WP_REST_Controller
                     'args' => $this->get_collection_params()
                 ],
                 [
-                    'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => [$this, 'store'],
-                    'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
-                    'args' => $this->get_collection_params()
-                ],
-                [
                     'methods' => WP_REST_Server::EDITABLE,
                     'callback' => [$this, 'update'],
                     'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
@@ -90,18 +84,6 @@ class FormApi extends WP_REST_Controller
             '/forms/fields',
             [
                 [
-                    'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => [$this, 'store_form_field_info'],
-                    'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
-                    'args' => $this->get_collection_params()
-                ],
-                [
-                    'methods' => WP_REST_Server::EDITABLE,
-                    'callback' => [$this, 'update_form_field_info'],
-                    'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
-                    'args' => $this->get_collection_params()
-                ],
-                [
                     'methods' => WP_REST_Server::DELETABLE,
                     'callback' => [$this, 'delete_field_info'],
                     'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
@@ -127,11 +109,12 @@ class FormApi extends WP_REST_Controller
     public function create_empty_form()
     {
         $response = $this->dynamic_form->create_empty_form();
-        return $response;
+        return new WP_REST_Response($response);
     }
 
     public function update(WP_REST_Request $request)
     {
+        $response = [];
         $params = $request->get_params();
         $data = [
             'title' => $params['title'],
@@ -140,8 +123,19 @@ class FormApi extends WP_REST_Controller
             'classes' => $params['classes'],
             'form_id' => $params['form_id'],
         ];
-        $response = $this->dynamic_form->update($data, $params['id']);
-        return $response;
+        $this->dynamic_form->update($data, $params['id']);
+
+        if (is_array($params['fields']) && count($params['fields']) > 0) {
+            foreach ($params['fields'] as $field) {
+                if ($field['id'] != 0) {
+                    $this->form_field->update($field);
+                } else {
+                    $this->form_field->store($field);
+                }
+            }
+        }
+        $response['data'] = $this->dynamic_form->find($params['id']);
+        return new WP_REST_Response($response);
     }
 
     public function get_dynamic_forms(WP_REST_Request $request)
@@ -165,23 +159,6 @@ class FormApi extends WP_REST_Controller
     {
         $params = $request->get_params();
         $response = $this->dynamic_form->find($params['id']);
-
-        return new WP_REST_Response($response);
-    }
-
-
-    public function store_form_field_info(WP_REST_Request $request)
-    {
-        $params = $request->get_params();
-        $response = $this->form_field->store($params);
-
-        return new WP_REST_Response($response);
-    }
-
-    public function update_form_field_info(WP_REST_Request $request)
-    {
-        $params = $request->get_params();
-        $response = $this->form_field->update($params);
 
         return new WP_REST_Response($response);
     }

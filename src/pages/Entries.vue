@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white shadow-lg p-4 w-full m-auto">
-    <h1 class="flex justify-between items-center">
+    <h1 class="flex justify-between items-center !p-0">
       <span>
         All Entries of
         <span class="border border-gray-300 px-2 py-1 rounded bg-gray-100">{{
@@ -9,9 +9,22 @@
       </span>
       <router-link
         to="/"
-        class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
+        class="px-4 py-2 bg-indigo-100 text-indigo-500 hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
       >
-        Back
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"
+          />
+        </svg>
       </router-link>
     </h1>
     <div

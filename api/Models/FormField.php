@@ -44,21 +44,17 @@ class FormField
         $wpdb->insert($this->table, $data);
 
         $last_id = $wpdb->insert_id;
-        $row = $this->find($last_id);
 
-        if (is_array($params['option_ids']) && count($params['option_ids']) > 0) {
-            foreach ($params['option_ids'] as $key => $id) {
+        if (is_array($params['options']) && count($params['options']) > 0) {
+            foreach ($params['options'] as $option) {
                 $option = [
-                    'value' => $params['option_values'][$key],
-                    'text' => $params['option_texts'][$key],
+                    'value' => $option['value'],
+                    'text' => $option['text'],
                     'form_field_id' => $last_id,
                 ];
                 (new FieldOption)->store($option);
             }
         }
-
-
-        return $row;
     }
 
     public function update($params)
@@ -80,23 +76,21 @@ class FormField
         ];
         $wpdb->update($this->table, $data, ['id' => $params['id']]);
 
-        if (is_array($params['option_ids']) && count($params['option_ids']) > 0) {
-            foreach ($params['option_ids'] as $key => $id) {
+        if (is_array($params['options']) && count($params['options']) > 0) {
+            foreach ($params['options'] as $row) {
                 $option = [
-                    'value' => $params['option_values'][$key],
-                    'text' => $params['option_texts'][$key],
+                    'value' => $row['value'],
+                    'text' => $row['text'],
                     'form_field_id' => $params['id'],
                 ];
-                if ($id == 0) {
+                if ($row['id'] == 0) {
                     (new FieldOption)->store($option);
                 } else {
-                    $option['id'] = $id;
+                    $option['id'] = $row['id'];
                     (new FieldOption)->update($option);
                 }
             }
         }
-
-        return $this->find($params['id']);
     }
 
 
