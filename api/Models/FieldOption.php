@@ -27,15 +27,7 @@ class FieldOption
             'value' => $params['value'],
             'status' => 1,
         ];
-        $result = $wpdb->insert($this->table, $data);
-
-        if ($result) {
-            $last_id = $wpdb->insert_id;
-            $row = $this->find($last_id);
-
-            return $row;
-        }
-        return null;
+        $wpdb->insert($this->table, $data);
     }
 
     public function update($params)
@@ -46,14 +38,7 @@ class FieldOption
             'value' => $params['value'],
             'form_field_id' => $params['form_field_id'],
         ];
-        $result = $wpdb->update($this->table, $data, ['id' => $params['id']]);
-
-        if ($result) {
-            $row = $this->find($params['id']);
-
-            return $row;
-        }
-        return null;
+        $wpdb->update($this->table, $data, ['id' => $params['id']]);
     }
 
     public function find($id)

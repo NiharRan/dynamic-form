@@ -17,7 +17,7 @@ export const actions = {
       .replace(/ /g, "-")
       .replace(/[^\w-]+/g, "");
   },
-  CREATE_NEW_FORM: async function({ commit, state }) {
+  CREATE_NEW_FORM: async function({ state, dispatch }) {
     const response = await jQuery.ajax({
       type: "POST",
       url: "/wp-json/dynamic-form/v1/forms/empty",
@@ -27,6 +27,7 @@ export const actions = {
     if (response) {
       state.form = response;
       router.push(`/edit-form/${response.id}`);
+      dispatch("UPDATE_STATUS", true);
     }
   },
   FETCH_ALL_FORMS: async function({ commit }) {
@@ -47,18 +48,21 @@ export const actions = {
       data: { id },
     });
     dispatch("FETCH_ALL_FORMS");
+    dispatch("UPDATE_STATUS", true);
   },
 
-  SET_EMPTY_FIELD: function({ state }, payload) {
+  SET_EMPTY_FIELD: function({ state, dispatch }, payload) {
     state.form.fields.unshift(payload);
+    dispatch("UPDATE_STATUS", true);
   },
-  SET_EMPTY_OPTION: function({ state }, payload) {
+  SET_EMPTY_OPTION: function({ state, dispatch }, payload) {
     state.form.fields[payload.key].options.unshift(payload.option);
+    dispatch("UPDATE_STATUS", true);
   },
-  REMOVE_OPTION_FROM_LIST: async function({ state }, payload) {
+  REMOVE_OPTION_FROM_LIST: async function({ state, dispatch }, payload) {
     const option = state.form.fields[payload.key].options[payload.k];
     if (option && option.id != 0) {
-      const response = await jQuery.ajax({
+      await jQuery.ajax({
         type: "DELETE",
         url: "/wp-json/dynamic-form/v1/forms/fields/options",
         data: { id: option.id },
@@ -66,52 +70,10 @@ export const actions = {
       });
     }
     state.form.fields[payload.key].options.splice(payload.k, 1);
+    dispatch("UPDATE_STATUS", true);
   },
-  STORE_FIELD: async function({ state, dispatch }, payload) {
-    const field = state.form.fields[payload];
-    const option_ids = await field.options.map((option) => option.id);
-    const option_values = await field.options.map((option) => option.value);
-    const option_texts = await field.options.map((option) => option.text);
-
-    field.option_ids = option_ids;
-    field.option_values = option_values;
-    field.option_texts = option_texts;
-
-    const response = await jQuery.ajax({
-      type: "POST",
-      url: "/wp-json/dynamic-form/v1/forms/fields",
-      data: field,
-      dataType: "JSON",
-    });
-
-    if (response) {
-      dispatch("SET_FORM", response.dynamic_form_id);
-    }
-  },
-
-  UPDATE_FIELD: async function({ state, dispatch }, payload) {
-    const field = state.form.fields[payload];
-    const option_ids = await field.options.map((option) => option.id);
-    const option_values = await field.options.map((option) => option.value);
-    const option_texts = await field.options.map((option) => option.text);
-    field.option_ids = option_ids;
-    field.option_values = option_values;
-    field.option_texts = option_texts;
-
-    const response = await jQuery.ajax({
-      type: "PUT",
-      url: "/wp-json/dynamic-form/v1/forms/fields",
-      data: field,
-      dataType: "JSON",
-    });
-
-    if (response) {
-      dispatch("SET_FORM", response.dynamic_form_id);
-      state.field = null;
-    }
-  },
-
-  REMOVE_FIELD: async function({ state }, payload) {
+  REMOVE_FIELD: async function({ state, dispatch }, payload) {
+    console.log(payload);
     const field = state.form.fields[payload];
     if (field && field.id != 0) {
       const response = await jQuery.ajax({
@@ -122,32 +84,7 @@ export const actions = {
       });
     }
     state.form.fields.splice(payload, 1);
-  },
-
-  SAVE_DATA: async function({ commit, state }, payload) {
-    const response = await jQuery.ajax({
-      type: "POST",
-      url: "/wp-json/wp-vue/v1/users",
-      data: payload,
-      dataType: "JSON",
-    });
-    if (response) {
-      state.changed = true;
-      router.push("/");
-    }
-  },
-
-  UPDATE_DATA: async function({ commit, state }, payload) {
-    const response = await jQuery.ajax({
-      type: "PUT",
-      url: `/wp-json/wp-vue/v1/users`,
-      data: payload,
-      dataType: "JSON",
-    });
-    if (response) {
-      state.changed = true;
-      router.push("/");
-    }
+    dispatch("UPDATE_STATUS", true);
   },
 
   SET_FORM: async function({ commit, state }, payload) {
@@ -162,7 +99,11 @@ export const actions = {
     }
   },
 
-  UPDATE_FORM: async function({ commit }, payload) {
+  UPDATE_STATUS: function({ state }, payload) {
+    state.is_updated = payload;
+  },
+
+  UPDATE_FORM: async function({ commit, dispatch }, payload) {
     const response = await jQuery.ajax({
       type: "PUT",
       url: `/wp-json/dynamic-form/v1/forms`,
@@ -170,7 +111,8 @@ export const actions = {
       dataType: "JSON",
     });
     if (response) {
-      commit("SETING_FORM", response);
+      commit("SETING_FORM", response.data);
+      dispatch("UPDATE_STATUS", true);
     }
   },
 
@@ -183,13 +125,8 @@ export const actions = {
     });
     if (response) {
       commit("UPDATE_ENTRIES", response);
+    } else {
+      commit("UPDATE_ENTRIES", []);
     }
-  },
-
-  CHANGED_ACTION: function({ commit, state }, payload) {
-    state.changed = payload;
-  },
-  CHANGED_ACTION_MESSAGE: function({ commit, state }, payload) {
-    state.message = payload;
   },
 };

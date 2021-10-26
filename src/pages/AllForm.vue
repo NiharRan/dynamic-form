@@ -1,12 +1,23 @@
 <template>
   <div class="bg-white shadow-lg p-4 w-full m-auto">
-    <h1 class="flex justify-between items-center">
+    <h1 class="flex justify-between items-center !p-0">
       <span>All Forms</span>
       <router-link
         to="/new-form"
-        class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
+        class="px-4 py-2 bg-indigo-100 text-indigo-500 hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
       >
-        Create New Form
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+            clip-rule="evenodd"
+          />
+        </svg>
       </router-link>
     </h1>
     <div
@@ -27,7 +38,7 @@
             >
               Shortcode
             </th>
-            <th 
+            <th
               scope="col"
               class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
@@ -72,11 +83,8 @@
                 </span>
                 <!---->
                 <span class="ff_entries"
-                  ><router-link
-                    target="_blank"
-                    :to="`/preview-form/${form.id}`"
-                  >
-                    Preview</router-link
+                  ><a target="_blank" :href="`/?page=preview-form&preview_id=${form.id}`">
+                    Preview</a
                   >
                   |
                 </span>

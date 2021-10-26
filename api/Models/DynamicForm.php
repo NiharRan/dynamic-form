@@ -38,8 +38,7 @@ class DynamicForm
                 'shortcode' => '[' . FORM_SHORTCODE . ' id="' . $last_id . '"]'
             ], ['id' => $last_id]);
 
-            $row = $this->find($last_id);
-            return new WP_REST_Response($row);
+            return $this->find($last_id);
         }
         return null;
     }
@@ -115,24 +114,13 @@ class DynamicForm
     public function store($data)
     {
         global $wpdb;
-        $result = $wpdb->insert($this->table, $data);
-
-        if ($result) {
-            $last_id = $wpdb->insert_id;
-            return $this->find($last_id);
-        }
-        return null;
+        return $wpdb->insert($this->table, $data);
     }
 
     public function update($data, $id)
     {
         global $wpdb;
-        $result = $wpdb->update($this->table, $data, array("id" => $id));
-
-        if ($result) {
-            return $this->find($id);
-        }
-        return null;
+        return $wpdb->update($this->table, $data, array("id" => $id));
     }
 
     public function find($id)

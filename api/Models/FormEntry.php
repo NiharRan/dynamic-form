@@ -13,7 +13,21 @@ class FormEntry
     public function fetch_all($params)
     {
         global $wpdb;
-        return $wpdb->get_results("SELECT * FROM $this->table ORDER BY id DESC");
+        $condition = '';
+        $sql = "SELECT * FROM $this->table A";
+
+        if (isset($params['id']) && $params['id'] != '') {
+            $condition .= "A.dynamic_form_id=" . $params['id'] . " AND";
+        }
+
+        if ($condition != '') {
+            $condition = " WHERE $condition ";
+        }
+
+        $condition = rtrim($condition, " AND ");
+        $sql .= $condition;
+        $sql .= " ORDER BY A.id DESC";
+        return $wpdb->get_results($sql);
     }
 
     public function store($params)

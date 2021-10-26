@@ -20,5 +20,16 @@ export default {
         title: message,
       });
     },
+    $confirm: async function(message, confirmText = "Yes, delete it!") {
+      return await Swal.fire({
+        title: "Are you sure?",
+        text: message,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: confirmText,
+      });
+    },
   },
 };

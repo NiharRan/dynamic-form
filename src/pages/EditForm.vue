@@ -1,14 +1,50 @@
 <template>
   <div>
     <div class="bg-white shadow-lg p-4 w-full m-auto">
-      <h1 class="flex justify-between items-center">
+      <h1 class="flex justify-between items-center !p-0">
         <span>Form</span>
-        <router-link
-          to="/"
-          class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
-        >
-          Back
-        </router-link>
+
+        <div class="flex">
+          <router-link
+            to="/"
+            class="px-4 py-2 block mr-4 bg-indigo-100 text-indigo-500 font-bold hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"
+              />
+            </svg>
+          </router-link>
+          <button
+            type="button"
+            @click="updateForm"
+            class="px-4 py-2 bg-green-100 text-green-500 font-bold hover:text-text-green-600 hover:bg-green-200 transition-all delay-300 ease-in-out"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+              />
+            </svg>
+          </button>
+        </div>
       </h1>
 
       <form @submit.prevent="store" v-if="form">
@@ -64,16 +100,20 @@
             <button
               type="button"
               @click="addField"
-              class="px-4 py-2 mt-5 bg-blue-500 text-white font-bold rounded-md hover:text-white hover:bg-blue-600 transition-all delay-300 ease-in-out"
+              class="px-4 py-2 bg-blue-100 text-blue-500 font-bold hover:text-blue-600 hover:bg-blue-200 transition-all delay-300 ease-in-out"
             >
-              Add Field
-            </button>
-            <button
-              type="button"
-              @click="updateForm"
-              class="px-4 py-2 mt-5 bg-green-500 text-white font-bold rounded-md hover:text-white hover:bg-green-600 transition-all delay-300 ease-in-out"
-            >
-              Update
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -82,10 +122,30 @@
 
     <div v-if="form && form.fields && form.fields.length > 0">
       <div
-        class="bg-white shadow-lg p-4 mt-8 w-full flex"
+        class="bg-white shadow-lg p-4 mt-8 w-full flex relative"
         v-for="(field, key) in form.fields"
         :key="key"
       >
+        <div class=" absolute right-0 top-0">
+          <button
+            type="button"
+            @click="removeFeild(key)"
+            class="px-2 py-1 float-right bg-red-100 text-red-500 font-bold hover:text-red-600 hover:bg-red-200 transition-all delay-300 ease-in-out"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
         <div class="md:w-8/12 w-full md:!border-r-2 md:pr-4" v-if="field">
           <div class="grid grid-cols-3 gap-4">
             <div>
@@ -142,22 +202,6 @@
                 placeholder="Field Height"
               />
             </div>
-          </div>
-          <div class="flex justify-center items-center">
-            <button
-              type="button"
-              @click="field.is_new ? storeField(key) : updateField(key)"
-              class="px-4 py-2 mt-6 mr-4 float-right bg-green-500 text-white font-bold rounded-md hover:text-white hover:bg-green-600 transition-all delay-300 ease-in-out"
-            >
-              {{ field.is_new ? "Add" : "Update" }}
-            </button>
-            <button
-              type="button"
-              @click="removeFeild(key)"
-              class="px-4 py-2 mt-5 float-right bg-red-500 text-white font-bold rounded-md hover:text-white hover:bg-red-600 transition-all delay-300 ease-in-out"
-            >
-              Remove
-            </button>
           </div>
         </div>
         <div class="w-full md:w-4/12 md:pl-4">
@@ -239,9 +283,20 @@
                     <button
                       type="button"
                       @click="addSelectOption(key)"
-                      class="px-4 py-2 float-right bg-indigo-500 text-white font-bold rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
+                      class="px-3 py-1 float-right bg-indigo-100 text-indigo-500 font-bold hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
                     >
-                      New
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
                     </button>
                   </th>
                 </tr>
@@ -274,9 +329,20 @@
                     <button
                       type="button"
                       @click="removeSelectedOption(key, k)"
-                      class="px-4 py-2 bg-red-500 text-white font-bold rounded-md hover:text-white hover:bg-red-600 transition-all delay-300 ease-in-out"
+                      class="px-3 py-1 bg-red-100 text-red-500 font-bold hover:text-red-600 hover:bg-red-200 transition-all delay-300 ease-in-out"
                     >
-                      Delete
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
                     </button>
                   </td>
                 </tr>
@@ -299,7 +365,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["form", "field", "select"]),
+    ...mapGetters(["form", "is_updated"]),
   },
   methods: {
     generateSlug: function() {
@@ -307,6 +373,7 @@ export default {
     },
     addField: function() {
       const field = {
+        id: 0,
         dynamic_form_id: this.form.id,
         label: "",
         placeholder: "",
@@ -324,14 +391,13 @@ export default {
 
       this.$store.dispatch("SET_EMPTY_FIELD", field);
     },
-    removeField: function() {
-      this.$store.dispatch("SET_EMPTY_FIELD", null);
-    },
-    storeField: function(key) {
-      this.$store.dispatch("STORE_FIELD", key);
-    },
-    updateField: function(key) {
-      this.$store.dispatch("UPDATE_FIELD", key);
+    removeField: async function() {
+      const result = await this.$confirm(
+        "This field will be removed permanently"
+      );
+      if (result.isConfirmed) {
+        this.$store.dispatch("SET_EMPTY_FIELD", null);
+      }
     },
     addSelectOption: function(key) {
       const field = this.form.fields[key];
@@ -345,22 +411,24 @@ export default {
       this.$store.dispatch("SET_EMPTY_OPTION", { option, key });
     },
     updateForm: function() {
-      const form = {
-        title: this.form.title,
-        id: this.form.id,
-        slug: this.form.slug,
-        shortcode: this.form.shortcode,
-        classes: this.form.classes,
-        form_id: this.form.form_id,
-      };
-      this.$store.dispatch("UPDATE_FORM", form);
+      this.$store.dispatch("UPDATE_FORM", this.form);
     },
-    removeSelectedOption: function(key, k) {
-      const payload = { key: key, k: k };
-      this.$store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
+    removeSelectedOption: async function(key, k) {
+      const result = await this.$confirm(
+        "This field option will be removed permanently"
+      );
+      if (result.isConfirmed) {
+        const payload = { key: key, k: k };
+        this.$store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
+      }
     },
-    removeFeild: function(key) {
-      this.$store.dispatch("REMOVE_FIELD", key);
+    removeFeild: async function(key) {
+      const result = await this.$confirm(
+        "This field will be removed permanently"
+      );
+      if (result.isConfirmed) {
+        this.$store.dispatch("REMOVE_FIELD", key);
+      }
     },
   },
   created() {
@@ -368,6 +436,12 @@ export default {
     const url_params = url.split("/");
     const id = url_params[url_params.length - 1];
     this.$store.dispatch("SET_FORM", id);
+  },
+  watch: {
+    is_updated: function(value) {
+      this.$toast("Data updated successfully", "success");
+      this.$store.dispatch("UPDATE_STATUS", false);
+    },
   },
 };
 </script>
