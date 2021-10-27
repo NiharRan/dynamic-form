@@ -14,11 +14,17 @@ class DynamicForm
     }
 
 
+    public function get_last()
+    {
+        global $wpdb;
+        return $wpdb->get_row("SELECT * FROM $this->table ORDER BY id DESC");
+    }
+
 
     public function create_empty_form()
     {
         global $wpdb;
-        $last_form = $wpdb->get_row("SELECT * FROM $this->table ORDER BY id DESC");
+        $last_form = $this->get_last();
         $id = $last_form ? $last_form->id + 1 : 1;
         $title = "Demo Form $id";
         $slug = "demo_form_$id";
@@ -195,5 +201,63 @@ class DynamicForm
             $wpdb->delete($form_field_table, ['id' => $row->id]);
         }
         return $wpdb->delete($this->table, ['id' => $id]);
+    }
+
+    public function duplicate_form($params)
+    {
+        global $wpdb;
+        $last_form = $this->get_last();
+        $id = $last_form ? $last_form->id + 1 : 1;
+
+        $form = $this->find($params['id']);
+        $result = null;
+        $data = [
+            'title' => $params['title'],
+            'slug' => $params['slug'],
+            'shortcode' => '',
+            'classes' => $form->classes,
+            'form_id' => "form-$id",
+
+        ];
+        $result = $wpdb->insert($this->table, $data);
+
+        if ($result) {
+            $last_id = $wpdb->insert_id;
+
+            $wpdb->update($this->table, [
+                'shortcode' => '[' . FORM_SHORTCODE . ' id="' . $last_id . '"]'
+            ], ['id' => $last_id]);
+
+            foreach ($form->fields as $field) {
+                $field_data = [
+                    'label' => $field->label,
+                    'placeholder' => $field->placeholder,
+                    'name' => $field->name,
+                    'field_id' => $field->field_id,
+                    'width' => $field->width,
+                    'height' => $field->height,
+                    'type' => $field->type,
+                    'input_type' => $field->input_type,
+                    'rows' => $field->rows,
+                    'is_required' => $field->is_required == "true" ? 1 : 0,
+                    'dynamic_form_id' => $last_id,
+                ];
+                $wpdb->insert(FORM_FIELD, $field_data);
+
+                $last_field_id = $wpdb->insert_id;
+
+                if (is_array($field->options) && count($field->options) > 0) {
+                    foreach ($field->options as $option) {
+                        $option = [
+                            'value' => $option->value,
+                            'text' => $option->text,
+                            'form_field_id' => $last_field_id,
+                        ];
+                        (new FieldOption)->store($option);
+                    }
+                }
+            }
+        }
+        return $result;
     }
 }

@@ -17,6 +17,7 @@
     "cross-env": "^7.0.3",
     "sweetalert2": "^11.1.9",
     "vue": "^2.6.14",
+    "vue-clipboard2": "^0.3.3",
     "vue-router": "^3.5.2",
     "vuex": "^3.6.2"
   },

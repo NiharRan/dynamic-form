@@ -13,7 +13,8 @@ export default new Vuex.Store({
     forms: [],
     form: null,
     entries: [],
-    is_updated: false
+    is_updated: false,
+    is_visible: false,
   },
   actions,
   getters,

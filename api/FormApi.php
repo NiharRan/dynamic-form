@@ -67,6 +67,19 @@ class FormApi extends WP_REST_Controller
 
         register_rest_route(
             $this->namespace,
+            '/forms/duplicate',
+            [
+                [
+                    'methods' => WP_REST_Server::CREATABLE,
+                    'callback' => [$this, 'duplicate'],
+                    'permission_callback' => [$this, 'get_dynamic_forms_permission_check'],
+                    'args' => $this->get_collection_params()
+                ],
+            ]
+        );
+
+        register_rest_route(
+            $this->namespace,
             '/forms/find',
             [
                 [
@@ -135,6 +148,13 @@ class FormApi extends WP_REST_Controller
             }
         }
         $response['data'] = $this->dynamic_form->find($params['id']);
+        return new WP_REST_Response($response);
+    }
+
+    public function duplicate(WP_REST_Request $request)
+    {
+        $params = $request->get_params();
+        $response = $this->dynamic_form->duplicate_form($params);
         return new WP_REST_Response($response);
     }
 

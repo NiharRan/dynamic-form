@@ -102,6 +102,9 @@ export const actions = {
   UPDATE_STATUS: function({ state }, payload) {
     state.is_updated = payload;
   },
+  UPDATE_MODAL_STATUS: function({ state }, payload) {
+    state.is_visible = payload;
+  },
 
   UPDATE_FORM: async function({ commit, dispatch }, payload) {
     const response = await jQuery.ajax({
@@ -115,7 +118,19 @@ export const actions = {
       dispatch("UPDATE_STATUS", true);
     }
   },
-
+  DEPLICATE_FORM: async function({ dispatch }, payload) {
+    const response = await jQuery.ajax({
+      type: "POST",
+      url: "/wp-json/dynamic-form/v1/forms/duplicate",
+      data: payload,
+      dataType: "JSON",
+    });
+    if (response) {
+      dispatch("FETCH_ALL_FORMS");
+      dispatch("UPDATE_STATUS", true);
+      dispatch("UPDATE_MODAL_STATUS", false);
+    }
+  },
   FETCH_ALL_ENTRIES: async function({ commit }, payload) {
     const response = await jQuery.ajax({
       type: "GET",
