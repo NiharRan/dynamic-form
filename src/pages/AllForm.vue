@@ -83,12 +83,20 @@
                 </span>
                 <!---->
                 <span class="ff_entries"
-                  ><a target="_blank" :href="`/?page=preview-form&preview_id=${form.id}`">
+                  ><a
+                    target="_blank"
+                    :href="`/?page=preview-form&preview_id=${form.id}`"
+                  >
                     Preview</a
                   >
                   |
                 </span>
-                <span class="ff_duplicate"><a href="#"> Duplicate</a> | </span>
+                <span class="ff_duplicate"
+                  ><a type="button" @click.prevent="showDuplicateForm(key)">
+                    Duplicate
+                  </a>
+                  |
+                </span>
                 <span class="trash text-red-500"
                   ><span>
                     <span class="remove-btn el-popover__reference"
@@ -102,9 +110,30 @@
             </td>
             <td class="px-3 py-1 whitespace-nowrap">
               <span
-                class="border border-gray-300 px-2 py-1 rounded bg-gray-100"
-                >{{ form.shortcode }}</span
+                class="flex items-center border border-gray-300 px-2 py-1 rounded bg-gray-100"
               >
+                <span
+                  class="mr-4 cursor-pointer"
+                  v-clipboard:copy="form.shortcode"
+                  v-clipboard:success="onCopy"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+                    />
+                  </svg>
+                </span>
+                <span class="">{{ form.shortcode }}</span>
+              </span>
             </td>
 
             <td class="px-3 py-1 whitespace-nowrap text-sm text-gray-500">
@@ -134,22 +163,70 @@
         </tbody>
       </table>
     </div>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <duplicate-model
+      :form="form"
+      @hideModel="hideModel"
+      @duplicate="duplicate"
+    ></duplicate-model>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import DuplicateModel from "../components/DuplicateModel.vue";
 export default {
+  name: "AllForms",
+  components: {
+    DuplicateModel,
+  },
+  data: function() {
+    return {
+      form: {
+        title: "",
+        slug: "",
+        id: "",
+      },
+    };
+  },
   computed: {
-    ...mapGetters(["forms"]),
+    ...mapGetters(["forms", "is_updated"]),
   },
   methods: {
-    destroy: function(id) {
-      this.$store.dispatch("DESTROY_FORM", id);
+    onCopy: function() {
+      alert("Copied");
+    },
+    showDuplicateForm: function(key) {
+      const form = this.forms[key];
+      this.form.id = form.id;
+      this.$store.dispatch("UPDATE_MODAL_STATUS", true);
+    },
+    hideModel: function() {
+      this.$store.dispatch("UPDATE_MODAL_STATUS", false);
+      this.form.title = "";
+      this.form.slug = "";
+      this.form.id = "";
+    },
+    destroy: async function(id) {
+      const result = await this.$confirm(
+        "This form will be removed permanently"
+      );
+      if (result.isConfirmed) {
+        this.$store.dispatch("DESTROY_FORM", id);
+      }
+    },
+    duplicate: function() {
+      this.$store.dispatch("DEPLICATE_FORM", this.form);
     },
   },
   created() {
     this.$store.dispatch("FETCH_ALL_FORMS");
+  },
+  watch: {
+    is_updated: function(value) {
+      this.$toast("Data updated successfully", "success");
+      this.$store.dispatch("UPDATE_STATUS", false);
+    },
   },
 };
 </script>
