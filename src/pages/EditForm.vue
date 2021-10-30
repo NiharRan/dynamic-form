@@ -7,7 +7,19 @@
         <div class="flex">
           <router-link
             to="/"
-            class="px-4 py-2 block mr-4 bg-indigo-100 text-indigo-500 font-bold hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
+            class="
+              px-4
+              py-2
+              block
+              mr-4
+              bg-indigo-100
+              text-indigo-500
+              font-bold
+              hover:text-indigo-600 hover:bg-indigo-200
+              transition-all
+              delay-300
+              ease-in-out
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +39,17 @@
           <button
             type="button"
             @click="updateForm"
-            class="px-4 py-2 bg-green-100 text-green-500 font-bold hover:text-text-green-600 hover:bg-green-200 transition-all delay-300 ease-in-out"
+            class="
+              px-4
+              py-2
+              bg-green-100
+              text-green-500
+              font-bold
+              hover:text-text-green-600 hover:bg-green-200
+              transition-all
+              delay-300
+              ease-in-out
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +122,18 @@
             <button
               type="button"
               @click="addField"
-              class="px-4 py-2 bg-blue-100 text-blue-500 font-bold hover:text-blue-600 hover:bg-blue-200 transition-all delay-300 ease-in-out"
+              class="
+                px-4
+                py-2
+                bg-blue-100
+                text-blue-500
+                font-bold
+                hover:text-blue-600 hover:bg-blue-200
+                transition-all
+                delay-300
+                ease-in-out
+                float-left
+              "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,11 +159,22 @@
         v-for="(field, key) in form.fields"
         :key="key"
       >
-        <div class=" absolute right-0 top-0">
+        <div class="absolute right-0 top-0">
           <button
             type="button"
-            @click="removeFeild(key)"
-            class="px-2 py-1 float-right bg-red-100 text-red-500 font-bold hover:text-red-600 hover:bg-red-200 transition-all delay-300 ease-in-out"
+            @click="removeField(key)"
+            class="
+              px-2
+              py-1
+              float-right
+              bg-red-100
+              text-red-500
+              font-bold
+              hover:text-red-600 hover:bg-red-200
+              transition-all
+              delay-300
+              ease-in-out
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -260,30 +304,68 @@
             class="w-full mt-6"
             v-if="
               field.type === 'select' ||
-                field.input_type === 'checkbox' ||
-                field.input_type === 'radio'
+              field.input_type === 'checkbox' ||
+              field.input_type === 'radio'
             "
           >
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
                   <th
-                    class="px-6 py-3 border text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="
+                      px-6
+                      py-3
+                      border
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
                   >
                     Value
                   </th>
                   <th
-                    class="px-6 py-3 border text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="
+                      px-6
+                      py-3
+                      border
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
                   >
                     Text
                   </th>
                   <th
-                    class="px-6 py-3 border text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="
+                      px-6
+                      py-3
+                      border
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
                   >
                     <button
                       type="button"
                       @click="addSelectOption(key)"
-                      class="px-3 py-1 float-right bg-indigo-100 text-indigo-500 font-bold hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
+                      class="
+                        px-3
+                        py-1
+                        float-right
+                        bg-indigo-100
+                        text-indigo-500
+                        font-bold
+                        hover:text-indigo-600 hover:bg-indigo-200
+                        transition-all
+                        delay-300
+                        ease-in-out
+                      "
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +386,16 @@
               <tbody class="bg-gray-50">
                 <tr v-for="(option, k) in field.options" :key="k">
                   <td
-                    class="px-6 py-3 border text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="
+                      px-6
+                      py-3
+                      border
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
                   >
                     <input
                       type="text"
@@ -314,7 +405,16 @@
                     />
                   </td>
                   <td
-                    class="px-6 py-3 border text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="
+                      px-6
+                      py-3
+                      border
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
                   >
                     <input
                       type="text"
@@ -324,12 +424,31 @@
                     />
                   </td>
                   <td
-                    class="px-6 py-3 border text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="
+                      px-6
+                      py-3
+                      border
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
                   >
                     <button
                       type="button"
                       @click="removeSelectedOption(key, k)"
-                      class="px-3 py-1 bg-red-100 text-red-500 font-bold hover:text-red-600 hover:bg-red-200 transition-all delay-300 ease-in-out"
+                      class="
+                        px-3
+                        py-1
+                        bg-red-100
+                        text-red-500
+                        font-bold
+                        hover:text-red-600 hover:bg-red-200
+                        transition-all
+                        delay-300
+                        ease-in-out
+                      "
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -362,16 +481,36 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed, watch } from "vue";
+import { useStore } from "vuex";
+import useAlert from "../mixins/useAlert";
 export default {
-  computed: {
-    ...mapGetters(["form", "is_updated"]),
-  },
-  methods: {
-    generateSlug: function() {
-      this.$store.dispatch("GENERATE_SLUG");
-    },
-    addField: function() {
+  setup() {
+    const store = useStore();
+    const { $confirm, $toast } = useAlert();
+
+    let form = computed(function () {
+      return store.state.form;
+    });
+    let is_updated = computed(function () {
+      return store.state.is_updated;
+    });
+
+    watch(is_updated, function (value) {
+      $toast("Data updated successfully", "success");
+      store.dispatch("UPDATE_STATUS", false);
+    });
+
+    const url = window.location.href;
+    const url_params = url.split("/");
+    const id = url_params[url_params.length - 1];
+    store.dispatch("SET_FORM", id);
+
+    // methods
+    const generateSlug = function () {
+      store.dispatch("GENERATE_SLUG");
+    };
+    const addField = function () {
       const field = {
         id: 0,
         dynamic_form_id: this.form.id,
@@ -388,19 +527,17 @@ export default {
         options: [],
         is_new: true,
       };
+      store.dispatch("SET_EMPTY_FIELD", field);
+    };
 
-      this.$store.dispatch("SET_EMPTY_FIELD", field);
-    },
-    removeField: async function() {
-      const result = await this.$confirm(
-        "This field will be removed permanently"
-      );
+    const removeField = async function (key) {
+      const result = await $confirm("This field will be removed permanently");
       if (result.isConfirmed) {
-        this.$store.dispatch("SET_EMPTY_FIELD", null);
+        store.dispatch("REMOVE_FIELD", key);
       }
-    },
-    addSelectOption: function(key) {
-      const field = this.form.fields[key];
+    };
+    const addSelectOption = function (key) {
+      const field = form.fields[key];
       const option = {
         id: 0,
         value: "",
@@ -408,40 +545,31 @@ export default {
         form_field_id: field.id,
       };
 
-      this.$store.dispatch("SET_EMPTY_OPTION", { option, key });
-    },
-    updateForm: function() {
-      this.$store.dispatch("UPDATE_FORM", this.form);
-    },
-    removeSelectedOption: async function(key, k) {
-      const result = await this.$confirm(
+      store.dispatch("SET_EMPTY_OPTION", { option, key });
+    };
+    const updateForm = function () {
+      store.dispatch("UPDATE_FORM", form.value);
+    };
+    const removeSelectedOption = async function (key, k) {
+      const result = await $confirm(
         "This field option will be removed permanently"
       );
       if (result.isConfirmed) {
         const payload = { key: key, k: k };
-        this.$store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
+        store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
       }
-    },
-    removeFeild: async function(key) {
-      const result = await this.$confirm(
-        "This field will be removed permanently"
-      );
-      if (result.isConfirmed) {
-        this.$store.dispatch("REMOVE_FIELD", key);
-      }
-    },
-  },
-  created() {
-    const url = window.location.href;
-    const url_params = url.split("/");
-    const id = url_params[url_params.length - 1];
-    this.$store.dispatch("SET_FORM", id);
-  },
-  watch: {
-    is_updated: function(value) {
-      this.$toast("Data updated successfully", "success");
-      this.$store.dispatch("UPDATE_STATUS", false);
-    },
+    };
+
+    return {
+      form,
+      is_updated,
+      generateSlug,
+      addField,
+      removeField,
+      addSelectOption,
+      removeSelectedOption,
+      updateForm,
+    };
   },
 };
 </script>

@@ -1,4 +1,4 @@
-import VueRouter from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 import AllForm from "../pages/AllForm.vue";
 import NewForm from "../pages/NewForm.vue";
@@ -12,8 +12,13 @@ const routes = [
   { path: "/entries/:id", component: Entries },
 ];
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes,
 });
+
+// const router = new VueRouter({
+//   routes,
+// });
 
 export default router;

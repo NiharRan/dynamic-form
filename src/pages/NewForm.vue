@@ -5,7 +5,19 @@
       <div class="flex">
         <router-link
           to="/"
-          class="px-4 py-2 block mr-4 bg-indigo-100 text-indigo-500 font-bold hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
+          class="
+            px-4
+            py-2
+            block
+            mr-4
+            bg-indigo-100
+            text-indigo-500
+            font-bold
+            hover:text-indigo-600 hover:bg-indigo-200
+            transition-all
+            delay-300
+            ease-in-out
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +38,16 @@
           type="button"
           v-if="!formData"
           @click="createNewForm"
-          class="px-4 py-2 bg-green-100 text-green-500 hover:text-green-600 hover:bg-green-200 transition-all delay-300 ease-in-out"
+          class="
+            px-4
+            py-2
+            bg-green-100
+            text-green-500
+            hover:text-green-600 hover:bg-green-200
+            transition-all
+            delay-300
+            ease-in-out
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,16 +68,31 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed, watch } from "vue";
+import { useStore } from "vuex";
+import useAlert from "../mixins/useAlert";
 export default {
-  computed: {
-    ...mapGetters(["formData"]),
+  setup() {
+    const store = useStore();
+    const { $toast } = useAlert();
+    let formData = computed(function () {
+      return store.state.formData;
+    });
+    let is_updated = computed(function () {
+      return store.state.is_updated;
+    });
+
+    watch(is_updated, function (value) {
+      $toast("Data updated successfully", "success");
+      store.dispatch("UPDATE_STATUS", false);
+    });
+
+    // methods
+    const createNewForm = function () {
+      store.dispatch("CREATE_NEW_FORM");
+    };
+
+    return { formData, is_updated, createNewForm };
   },
-  methods: {
-    createNewForm: function() {
-      this.$store.dispatch("CREATE_NEW_FORM");
-    },
-  },
-  created() {},
 };
 </script>

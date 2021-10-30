@@ -1,31 +1,19 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Vuex from "vuex";
+import { createApp } from "vue";
 
-import VueClipboard from 'vue-clipboard2'
-
-VueClipboard.config.autoSetContainer = true // add this line
-Vue.use(VueClipboard)
-
-Vue.use(VueRouter);
-Vue.use(Vuex);
+import VueClipboard from "vue3-clipboard";
 
 import store from "./store";
-import alertMixin from "./mixins/alert";
-import helperMixin from "./mixins/helper";
-
-Vue.mixin(alertMixin);
-Vue.mixin(helperMixin);
-
 import router from "./router";
 
 import App from "./App.vue";
 
-Vue.config.productionTip = false;
+const app = createApp(App).use(router).use(store);
 
-new Vue({
-  el: "#app",
-  router,
-  store,
-  render: (h) => h(App),
+app.config.productionTip = false;
+
+app.use(VueClipboard, {
+  autoSetContainer: true,
+  appendToBody: true,
 });
+
+app.mount("#app");
