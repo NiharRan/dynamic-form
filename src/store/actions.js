@@ -1,7 +1,7 @@
 import router from "../router";
 
 export const actions = {
-  GET_UNIQUE_SHORTCODE: async function({ commit }) {
+  GET_UNIQUE_SHORTCODE: async function ({ commit }) {
     const response = await jQuery.ajax({
       type: "GET",
       url: "/wp-json/dynamic-form/v1/shortcodes",
@@ -11,13 +11,13 @@ export const actions = {
       commit("SET_FORM_SHORTCODE", response.shortcode);
     }
   },
-  GENERATE_SLUG: function({ state }) {
+  GENERATE_SLUG: function ({ state }) {
     state.form.slug = state.form.title
       .toLowerCase()
       .replace(/ /g, "-")
       .replace(/[^\w-]+/g, "");
   },
-  CREATE_NEW_FORM: async function({ state, dispatch }) {
+  CREATE_NEW_FORM: async function ({ state, dispatch }) {
     const response = await jQuery.ajax({
       type: "POST",
       url: "/wp-json/dynamic-form/v1/forms/empty",
@@ -26,11 +26,11 @@ export const actions = {
 
     if (response) {
       state.form = response;
-      router.push(`/edit-form/${response.id}`);
       dispatch("UPDATE_STATUS", true);
+      router.push(`/edit-form/${response.id}`);
     }
   },
-  FETCH_ALL_FORMS: async function({ commit }) {
+  FETCH_ALL_FORMS: async function ({ commit }) {
     const response = await jQuery.ajax({
       type: "GET",
       url: `/wp-json/dynamic-form/v1/forms`,
@@ -41,7 +41,7 @@ export const actions = {
     }
   },
 
-  DESTROY_FORM: async function({ dispatch }, id) {
+  DESTROY_FORM: async function ({ dispatch }, id) {
     const response = await jQuery.ajax({
       type: "DELETE",
       url: "/wp-json/dynamic-form/v1/forms",
@@ -51,15 +51,15 @@ export const actions = {
     dispatch("UPDATE_STATUS", true);
   },
 
-  SET_EMPTY_FIELD: function({ state, dispatch }, payload) {
+  SET_EMPTY_FIELD: function ({ state, dispatch }, payload) {
     state.form.fields.unshift(payload);
     dispatch("UPDATE_STATUS", true);
   },
-  SET_EMPTY_OPTION: function({ state, dispatch }, payload) {
+  SET_EMPTY_OPTION: function ({ state, dispatch }, payload) {
     state.form.fields[payload.key].options.unshift(payload.option);
     dispatch("UPDATE_STATUS", true);
   },
-  REMOVE_OPTION_FROM_LIST: async function({ state, dispatch }, payload) {
+  REMOVE_OPTION_FROM_LIST: async function ({ state, dispatch }, payload) {
     const option = state.form.fields[payload.key].options[payload.k];
     if (option && option.id != 0) {
       await jQuery.ajax({
@@ -72,7 +72,7 @@ export const actions = {
     state.form.fields[payload.key].options.splice(payload.k, 1);
     dispatch("UPDATE_STATUS", true);
   },
-  REMOVE_FIELD: async function({ state, dispatch }, payload) {
+  REMOVE_FIELD: async function ({ state, dispatch }, payload) {
     console.log(payload);
     const field = state.form.fields[payload];
     if (field && field.id != 0) {
@@ -87,7 +87,7 @@ export const actions = {
     dispatch("UPDATE_STATUS", true);
   },
 
-  SET_FORM: async function({ commit, state }, payload) {
+  SET_FORM: async function ({ commit, state }, payload) {
     const response = await jQuery.ajax({
       type: "GET",
       url: `/wp-json/dynamic-form/v1/forms/find`,
@@ -99,14 +99,14 @@ export const actions = {
     }
   },
 
-  UPDATE_STATUS: function({ state }, payload) {
+  UPDATE_STATUS: function ({ state }, payload) {
     state.is_updated = payload;
   },
-  UPDATE_MODAL_STATUS: function({ state }, payload) {
+  UPDATE_MODAL_STATUS: function ({ state }, payload) {
     state.is_visible = payload;
   },
 
-  UPDATE_FORM: async function({ commit, dispatch }, payload) {
+  UPDATE_FORM: async function ({ commit, dispatch }, payload) {
     const response = await jQuery.ajax({
       type: "PUT",
       url: `/wp-json/dynamic-form/v1/forms`,
@@ -118,7 +118,7 @@ export const actions = {
       dispatch("UPDATE_STATUS", true);
     }
   },
-  DEPLICATE_FORM: async function({ dispatch }, payload) {
+  DEPLICATE_FORM: async function ({ dispatch }, payload) {
     const response = await jQuery.ajax({
       type: "POST",
       url: "/wp-json/dynamic-form/v1/forms/duplicate",
@@ -131,7 +131,7 @@ export const actions = {
       dispatch("UPDATE_MODAL_STATUS", false);
     }
   },
-  FETCH_ALL_ENTRIES: async function({ commit }, payload) {
+  FETCH_ALL_ENTRIES: async function ({ commit }, payload) {
     const response = await jQuery.ajax({
       type: "GET",
       url: `/wp-json/dynamic-form/v1/entries`,

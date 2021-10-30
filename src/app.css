@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .swal2-top-end {
-    @apply !top-8;
+  @apply !top-8;
+}
+
+label {
+  @apply !text-left !float-left;
 }

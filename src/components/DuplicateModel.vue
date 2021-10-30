@@ -7,7 +7,17 @@
     aria-modal="true"
   >
     <div
-      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      class="
+        flex
+        items-end
+        justify-center
+        min-h-screen
+        pt-4
+        px-4
+        pb-20
+        text-center
+        sm:block sm:p-0
+      "
     >
       <div
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -21,7 +31,18 @@
         >&#8203;</span
       >
       <div
-        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        class="
+          inline-block
+          align-bottom
+          bg-white
+          rounded-lg
+          text-left
+          overflow-hidden
+          shadow-xl
+          transform
+          transition-all
+          sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
+        "
       >
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <h2>Duplicate Form</h2>
@@ -49,7 +70,25 @@
           <button
             type="button"
             @click="$emit('duplicate')"
-            class="w-full inline-flex justify-center border border-transparent shadow-sm px-3 py-1 bg-green-100 text-base font-medium text-green-500 hover:bg-green-200 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 sm:ml-3 sm:w-auto sm:text-sm"
+            class="
+              w-full
+              inline-flex
+              justify-center
+              border border-transparent
+              shadow-sm
+              px-3
+              py-1
+              bg-green-100
+              text-base
+              font-medium
+              text-green-500
+              hover:bg-green-200 hover:text-green-600
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-green-300
+              sm:ml-3 sm:w-auto sm:text-sm
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +105,26 @@
           <button
             type="button"
             @click="hideModel"
-            class="mt-3 w-full inline-flex justify-center border border-transparent shadow-sm px-3 py-1 bg-red-100 text-base font-medium text-red-500 hover:bg-red-200 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            class="
+              mt-3
+              w-full
+              inline-flex
+              justify-center
+              border border-transparent
+              shadow-sm
+              px-3
+              py-1
+              bg-red-100
+              text-base
+              font-medium
+              text-red-500
+              hover:bg-red-200 hover:text-red-600
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-red-300
+              sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -88,30 +146,40 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["is_visible"]),
-  },
   props: {
     form: {
       type: Object,
-      default: function() {
-        return null;
-      },
-    }
-  },
-  methods: {
-    hideModel: function() {
-      this.$emit("hideModel");
+      default: () => null,
     },
-    generateSlug: function() {
-      const slug = this.form.title
+  },
+  setup(props) {
+    const store = useStore();
+    let form = props.form;
+    let is_visible = computed(function () {
+      return store.state.is_visible;
+    });
+
+    const hideModel = function () {
+      $emit("hideModel");
+    };
+
+    const generateSlug = function () {
+      const slug = form.title
         .toLowerCase()
         .replace(/ /g, "-")
         .replace(/[^\w-]+/g, "");
-      this.form.slug = slug;
-    },
+      form.slug = slug;
+    };
+
+    return {
+      is_visible,
+      form,
+      hideModel,
+      generateSlug,
+    };
   },
 };
 </script>

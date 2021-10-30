@@ -4,7 +4,16 @@
       <span>All Forms</span>
       <router-link
         to="/new-form"
-        class="px-4 py-2 bg-indigo-100 text-indigo-500 hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
+        class="
+          px-4
+          py-2
+          bg-indigo-100
+          text-indigo-500
+          hover:text-indigo-600 hover:bg-indigo-200
+          transition-all
+          delay-300
+          ease-in-out
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,37 +37,85 @@
           <tr>
             <th
               scope="col"
-              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               Title
             </th>
             <th
               scope="col"
-              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               Shortcode
             </th>
             <th
               scope="col"
-              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               Classes
             </th>
             <th
               scope="col"
-              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               ID
             </th>
             <th
               scope="col"
-              class="px-3 py-1 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-center text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               Entries
             </th>
             <th
               scope="col"
-              class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               Status
             </th>
@@ -66,7 +123,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="(form, key) in forms" :key="key">
-            <td class="px-3 py-1 whitespace-nowrap">
+            <td class="px-3 text-left py-1 whitespace-nowrap">
               <p class="text-lg font-semibold">{{ form.title }}</p>
               <div class="row-actions">
                 <span class="ff_edit"
@@ -110,7 +167,15 @@
             </td>
             <td class="px-3 py-1 whitespace-nowrap">
               <span
-                class="flex items-center border border-gray-300 px-2 py-1 rounded bg-gray-100"
+                class="
+                  flex
+                  items-center
+                  border border-gray-300
+                  px-2
+                  py-1
+                  rounded
+                  bg-gray-100
+                "
               >
                 <span
                   class="mr-4 cursor-pointer"
@@ -143,13 +208,25 @@
               {{ form.form_id }}
             </td>
             <th
-              class="px-3 py-1 whitespace-nowrap text-center text-sm text-gray-500"
+              class="
+                px-3
+                py-1
+                whitespace-nowrap
+                text-center text-sm text-gray-500
+              "
             >
               {{ form.total_entries }}
             </th>
             <td class="px-3 py-1 whitespace-nowrap">
               <span
-                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                class="
+                  px-2
+                  inline-flex
+                  text-xs
+                  leading-5
+                  font-semibold
+                  rounded-full
+                "
                 :class="[
                   form.status == 1
                     ? 'bg-green-100 text-green-800'
@@ -173,60 +250,77 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed, reactive, watch } from "vue";
+import { useStore } from "vuex";
 import DuplicateModel from "../components/DuplicateModel.vue";
+import useAlert from "../mixins/useAlert";
 export default {
   name: "AllForms",
   components: {
     DuplicateModel,
   },
-  data: function() {
-    return {
-      form: {
-        title: "",
-        slug: "",
-        id: "",
-      },
+  setup() {
+    let form = reactive({
+      title: "",
+      slug: "",
+      id: "",
+    });
+    const { $confirm, $toast } = useAlert();
+    const store = useStore();
+    store.dispatch("FETCH_ALL_FORMS");
+
+    // computed source codes
+    let forms = computed(function () {
+      return store.state.forms;
+    });
+    let is_updated = computed(function () {
+      return store.state.is_updated;
+    });
+
+    // watched code
+    watch(is_updated, function (value) {
+      $toast("Data updated successfully", "success");
+      store.dispatch("UPDATE_STATUS", false);
+    });
+
+    const showDuplicateForm = function (key) {
+      const row = forms.value[key];
+      form.id = row.id;
+      store.dispatch("UPDATE_MODAL_STATUS", true);
     };
-  },
-  computed: {
-    ...mapGetters(["forms", "is_updated"]),
-  },
-  methods: {
-    onCopy: function() {
-      alert("Copied");
-    },
-    showDuplicateForm: function(key) {
-      const form = this.forms[key];
-      this.form.id = form.id;
-      this.$store.dispatch("UPDATE_MODAL_STATUS", true);
-    },
-    hideModel: function() {
-      this.$store.dispatch("UPDATE_MODAL_STATUS", false);
-      this.form.title = "";
-      this.form.slug = "";
-      this.form.id = "";
-    },
-    destroy: async function(id) {
-      const result = await this.$confirm(
-        "This form will be removed permanently"
-      );
+
+    const duplicate = function () {
+      store.dispatch("DEPLICATE_FORM", form);
+    };
+
+    const destroy = async function (id) {
+      const result = await $confirm("This form will be removed permanently");
       if (result.isConfirmed) {
-        this.$store.dispatch("DESTROY_FORM", id);
+        store.dispatch("DESTROY_FORM", id);
       }
-    },
-    duplicate: function() {
-      this.$store.dispatch("DEPLICATE_FORM", this.form);
-    },
-  },
-  created() {
-    this.$store.dispatch("FETCH_ALL_FORMS");
-  },
-  watch: {
-    is_updated: function(value) {
-      this.$toast("Data updated successfully", "success");
-      this.$store.dispatch("UPDATE_STATUS", false);
-    },
+    };
+
+    const hideModel = function () {
+      store.dispatch("UPDATE_MODAL_STATUS", false);
+      form.title = "";
+      form.slug = "";
+      form.id = "";
+    };
+
+    const onCopy = function () {
+      alert("Copied");
+    };
+
+    return {
+      forms,
+      form,
+      is_updated,
+      showDuplicateForm,
+      duplicate,
+      destroy,
+      hideModel,
+      onCopy,
+    };
   },
 };
 </script>

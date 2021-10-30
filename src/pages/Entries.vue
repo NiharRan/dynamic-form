@@ -9,7 +9,16 @@
       </span>
       <router-link
         to="/"
-        class="px-4 py-2 bg-indigo-100 text-indigo-500 hover:text-indigo-600 hover:bg-indigo-200 transition-all delay-300 ease-in-out"
+        class="
+          px-4
+          py-2
+          bg-indigo-100
+          text-indigo-500
+          hover:text-indigo-600 hover:bg-indigo-200
+          transition-all
+          delay-300
+          ease-in-out
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +47,15 @@
               v-for="(field, key) in form.fields"
               :key="key"
               scope="col"
-              class="px-3 py-1 text-left text-sm font-medium text-gray-500 uppercase tracking-wider"
+              class="
+                px-3
+                py-1
+                text-left text-sm
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
             >
               {{ field.label }}
             </th>
@@ -62,22 +79,35 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["form", "entries"]),
-  },
-  methods: {
-    destroy: function(id) {
-      this.$store.dispatch("DESTROY_ENTRY", id);
-    },
-  },
-  created() {
+  setup() {
+    const store = useStore();
+
     const url = window.location.href;
     const url_params = url.split("/");
     const id = url_params[url_params.length - 1];
-    this.$store.dispatch("SET_FORM", id);
-    this.$store.dispatch("FETCH_ALL_ENTRIES", id);
+    store.dispatch("SET_FORM", id);
+    store.dispatch("FETCH_ALL_ENTRIES", id);
+
+    let form = computed(function () {
+      return store.state.form;
+    });
+    let entries = computed(function () {
+      return store.state.entries;
+    });
+
+    // methods
+    const destroy = function (id) {
+      store.dispatch("DESTROY_ENTRY", id);
+    };
+
+    return {
+      form,
+      entries,
+      destroy,
+    };
   },
 };
 </script>

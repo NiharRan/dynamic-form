@@ -5,7 +5,17 @@
         <span>Preview Form</span>
         <router-link
           to="/"
-          class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:text-white hover:bg-indigo-600 transition-all delay-300 ease-in-out"
+          class="
+            px-3
+            py-1
+            bg-indigo-500
+            text-white
+            rounded-md
+            hover:text-white hover:bg-indigo-600
+            transition-all
+            delay-300
+            ease-in-out
+          "
         >
           Back
         </router-link>
@@ -13,7 +23,10 @@
 
       <div class="w-6/12 mx-auto border p-4 rounded">
         <h1 class="text-center">
-          {{ form.title }} <span class="border border-gray-300 px-2 py-1 rounded bg-gray-100">{{ form.shortcode }}</span>
+          {{ form.title }}
+          <span class="border border-gray-300 px-2 py-1 rounded bg-gray-100">{{
+            form.shortcode
+          }}</span>
         </h1>
         <div v-if="form && form.fields">
           <div
@@ -25,8 +38,8 @@
             <input
               v-if="
                 field.type == 'input' &&
-                  field.input_type != 'checkbox' &&
-                  field.input_type != 'radio'
+                field.input_type != 'checkbox' &&
+                field.input_type != 'radio'
               "
               :type="field.input_type"
               class="w-full"
@@ -94,14 +107,26 @@
                 v-for="(option, k) in field.options"
                 :key="k"
                 :value="option.value"
-                >{{ option.text }}</option
               >
+                {{ option.text }}
+              </option>
             </select>
           </div>
           <div class="w-full mt-4">
             <button
               type="submit"
-              class="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:text-white hover:bg-green-600 transition-all delay-300 ease-in-out"
+              class="
+                px-4
+                py-2
+                bg-green-500
+                text-white
+                font-bold
+                rounded-md
+                hover:text-white hover:bg-green-600
+                transition-all
+                delay-300
+                ease-in-out
+              "
             >
               Submit
             </button>
@@ -113,16 +138,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["form"]),
-  },
-  created() {
+  setup() {
+    const store = useStore();
+
     const url = window.location.href;
     const url_params = url.split("/");
     const id = url_params[url_params.length - 1];
-    this.$store.dispatch("SET_FORM", id);
+    store.dispatch("SET_FORM", id);
+
+    let form = computed(function () {
+      return store.state.form;
+    });
+
+    return {
+      form,
+    };
   },
 };
 </script>
