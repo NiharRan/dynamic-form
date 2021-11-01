@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow-lg p-4 w-full m-auto">
+  <div class="bg-white shadow-lg p-4 w-full m-auto" v-if="form">
     <h1 class="flex justify-between items-center !p-0">
       <span>
         All Entries of
@@ -20,60 +20,23 @@
           ease-in-out
         "
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"
-          />
-        </svg>
+        <icon-close />
       </router-link>
     </h1>
     <div
       class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4"
     >
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50" v-if="form.fields.length > 0">
-          <tr>
-            <th>SN</th>
-            <th
-              v-for="(field, key) in form.fields"
-              :key="key"
-              scope="col"
-              class="
-                px-3
-                py-1
-                text-left text-sm
-                font-medium
-                text-gray-500
-                uppercase
-                tracking-wider
-              "
-            >
-              {{ field.label }}
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="(entry, key) in entries" :key="key">
-            <th>{{ key + 1 }}</th>
-            <td
-              class="px-3 py-1 whitespace-nowrap text-sm"
-              v-for="(field, k) in form.fields"
-              :key="k"
-            >
-              {{ entry.data[field.name] }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-table :headers="headers">
+        <template v-slot:headerColAtStart>
+          <app-table-row-col :text="'ID'" />
+        </template>
+        <app-table-row v-for="(entry, key) in entries" :key="key">
+          <app-table-row-col>{{ key + 1 }} </app-table-row-col>
+          <app-table-row-col v-for="(field, k) in form.fields" :key="k">
+            {{ entry.data[field.name] }}
+          </app-table-row-col>
+        </app-table-row>
+      </app-table>
     </div>
   </div>
 </template>
@@ -81,7 +44,10 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { IconClose } from "../components/icons";
+import { AppTable, AppTableRow, AppTableRowCol } from "../components/table";
 export default {
+  components: { IconClose, AppTable, AppTableRow, AppTableRowCol },
   setup() {
     const store = useStore();
 
@@ -94,6 +60,16 @@ export default {
     let form = computed(function () {
       return store.state.form;
     });
+    let headers = computed(function () {
+      return store.state.form.fields.map(function (row) {
+        return {
+          name: row.label,
+          key: row.name,
+          classes: "text-left",
+        };
+      });
+    });
+
     let entries = computed(function () {
       return store.state.entries;
     });
@@ -105,6 +81,7 @@ export default {
 
     return {
       form,
+      headers,
       entries,
       destroy,
     };

@@ -1,0 +1,23 @@
+const types = [
+  { value: "text", text: "Text" },
+  { value: "email", text: "Email" },
+  { value: "button", text: "Button" },
+  { value: "checkbox", text: "Checkbox" },
+  { value: "color", text: "Color" },
+  { value: "date", text: "Date" },
+  { value: "datetime-local", text: "Datetime Local" },
+  { value: "file", text: "File" },
+  { value: "hidden", text: "Hidden" },
+  { value: "number", text: "Number" },
+  { value: "password", text: "Password" },
+  { value: "radio", text: "Radio" },
+  { value: "range", text: "Range" },
+  { value: "reset", text: "Reset" },
+  { value: "search", text: "Search" },
+  { value: "submit", text: "Submit" },
+  { value: "tel", text: "Tel" },
+  { value: "time", text: "Time" },
+  { value: "url", text: "Url" },
+  { value: "week", text: "Week" },
+];
+export default types;

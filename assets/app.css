@@ -1045,6 +1045,12 @@ select {
 .text-center {
 	text-align: center;
 }
+.text-right {
+	text-align: right;
+}
+.align-top {
+	vertical-align: top;
+}
 .align-bottom {
 	vertical-align: bottom;
 }
@@ -1052,13 +1058,13 @@ select {
 	font-size: 1rem;
 	line-height: 1.5rem;
 }
-.text-xs {
-	font-size: 0.75rem;
-	line-height: 1rem;
-}
 .text-lg {
 	font-size: 1.125rem;
 	line-height: 1.75rem;
+}
+.text-xs {
+	font-size: 0.75rem;
+	line-height: 1rem;
 }
 .text-sm {
 	font-size: 0.875rem;
@@ -1098,10 +1104,6 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(99, 102, 241, var(--tw-text-opacity));
 }
-.text-gray-500 {
-	--tw-text-opacity: 1;
-	color: rgba(107, 114, 128, var(--tw-text-opacity));
-}
 .text-green-800 {
 	--tw-text-opacity: 1;
 	color: rgba(6, 95, 70, var(--tw-text-opacity));
@@ -1113,6 +1115,10 @@ select {
 .text-blue-500 {
 	--tw-text-opacity: 1;
 	color: rgba(59, 130, 246, var(--tw-text-opacity));
+}
+.text-gray-500 {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
 }
 .text-red-600 {
 	--tw-text-opacity: 1;
