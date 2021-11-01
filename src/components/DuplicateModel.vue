@@ -51,8 +51,8 @@
               <input
                 type="text"
                 class="w-full"
-                @keyup="generateSlug"
-                v-model="form.title"
+                @keyup="$emit('generateSlug')"
+                v-model="data.title"
                 placeholder="Form Title"
               />
             </div>
@@ -60,7 +60,7 @@
               <input
                 type="text"
                 class="w-full"
-                v-model="form.slug"
+                v-model="data.slug"
                 placeholder="Form Slug"
               />
             </div>
@@ -69,7 +69,7 @@
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button
             type="button"
-            @click="$emit('duplicate')"
+            @click.once="$emit('submit')"
             class="
               w-full
               inline-flex
@@ -104,7 +104,7 @@
           </button>
           <button
             type="button"
-            @click="hideModel"
+            @click.once="$emit('close')"
             class="
               mt-3
               w-full
@@ -150,35 +150,21 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
   props: {
-    form: {
+    data: {
       type: Object,
       default: () => null,
     },
   },
   setup(props) {
     const store = useStore();
-    let form = props.form;
+    let data = props.data;
     let is_visible = computed(function () {
       return store.state.is_visible;
     });
 
-    const hideModel = function () {
-      $emit("hideModel");
-    };
-
-    const generateSlug = function () {
-      const slug = form.title
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/[^\w-]+/g, "");
-      form.slug = slug;
-    };
-
     return {
       is_visible,
-      form,
-      hideModel,
-      generateSlug,
+      data,
     };
   },
 };

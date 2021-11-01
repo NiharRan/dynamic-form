@@ -21,51 +21,11 @@
               ease-in-out
             "
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"
-              />
-            </svg>
+            <icon-close />
           </router-link>
-          <button
-            type="button"
-            @click="updateForm"
-            class="
-              px-4
-              py-2
-              bg-green-100
-              text-green-500
-              font-bold
-              hover:text-text-green-600 hover:bg-green-200
-              transition-all
-              delay-300
-              ease-in-out
-            "
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-              />
-            </svg>
-          </button>
+          <btn-success @click="updateForm" class="px-4 py-2">
+            <icon-save />
+          </btn-success>
         </div>
       </h1>
 
@@ -119,35 +79,9 @@
             />
           </div>
           <div>
-            <button
-              type="button"
-              @click="addField"
-              class="
-                px-4
-                py-2
-                bg-blue-100
-                text-blue-500
-                font-bold
-                hover:text-blue-600 hover:bg-blue-200
-                transition-all
-                delay-300
-                ease-in-out
-                float-left
-              "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
+            <btn-primary @click="addField" class="px-4 py-2 float-left">
+              <icon-plus />
+            </btn-primary>
           </div>
         </div>
       </form>
@@ -160,35 +94,12 @@
         :key="key"
       >
         <div class="absolute right-0 top-0">
-          <button
-            type="button"
+          <btn-danger
             @click="removeField(key)"
-            class="
-              px-2
-              py-1
-              float-right
-              bg-red-100
-              text-red-500
-              font-bold
-              hover:text-red-600 hover:bg-red-200
-              transition-all
-              delay-300
-              ease-in-out
-            "
+            class="px-2 align-top py-1 float-right"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </button>
+            <icon-trash :classes="'w-4 h-4'" />
+          </btn-danger>
         </div>
         <div class="md:w-8/12 w-full md:!border-r-2 md:pr-4" v-if="field">
           <div class="grid grid-cols-3 gap-4">
@@ -277,26 +188,13 @@
               class="w-full min-w-full"
             >
               <option value="">Select ...</option>
-              <option value="text">Text</option>
-              <option value="email">Email</option>
-              <option value="button">Button</option>
-              <option value="checkbox">Checkbox</option>
-              <option value="color">Color</option>
-              <option value="date">Date</option>
-              <option value="datetime-local">Datetime Local</option>
-              <option value="file">File</option>
-              <option value="hidden">Hidden</option>
-              <option value="number">Number</option>
-              <option value="password">Password</option>
-              <option value="radio">Radio</option>
-              <option value="range">Range</option>
-              <option value="reset">Reset</option>
-              <option value="search">Search</option>
-              <option value="submit">Submit</option>
-              <option value="tel">Tel</option>
-              <option value="time">Time</option>
-              <option value="url">Url</option>
-              <option value="week">Week</option>
+              <option
+                v-for="(type, key) in input_types"
+                :key="key"
+                :value="type.value"
+              >
+                {{ type.text }}
+              </option>
             </select>
           </div>
 
@@ -308,165 +206,48 @@
               field.input_type === 'radio'
             "
           >
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th
-                    class="
-                      px-6
-                      py-3
-                      border
-                      text-left text-xs
-                      font-medium
-                      text-gray-500
-                      uppercase
-                      tracking-wider
-                    "
+            <app-table :headers="option_header">
+              <template v-slot:headerCol>
+                <app-table-row-col>
+                  <btn-info
+                    @click="addSelectOption(key)"
+                    class="px-3 py-1 float-right"
                   >
-                    Value
-                  </th>
-                  <th
-                    class="
-                      px-6
-                      py-3
-                      border
-                      text-left text-xs
-                      font-medium
-                      text-gray-500
-                      uppercase
-                      tracking-wider
-                    "
+                    <icon-plus :classes="'w-4 h-4'" />
+                  </btn-info>
+                </app-table-row-col>
+              </template>
+              <app-table-row v-for="(option, k) in field.options" :key="k">
+                <app-table-row-col :class="'font-medium text-gray-500'">
+                  <input
+                    type="text"
+                    v-model="form.fields[key].options[k].value"
+                    class="w-full"
+                    placeholder="Option's Value"
+                  />
+                </app-table-row-col>
+
+                <app-table-row-col
+                  :text="option.text"
+                  :class="'font-medium text-gray-500'"
+                >
+                  <input
+                    type="text"
+                    v-model="form.fields[key].options[k].text"
+                    class="w-full"
+                    placeholder="Option's Text"
+                  />
+                </app-table-row-col>
+                <app-table-row-col :class="'font-medium text-gray-500'">
+                  <btn-danger
+                    @click="removeSelectedOption(key, k)"
+                    :class="'float-right px-3 py-1'"
                   >
-                    Text
-                  </th>
-                  <th
-                    class="
-                      px-6
-                      py-3
-                      border
-                      text-left text-xs
-                      font-medium
-                      text-gray-500
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    <button
-                      type="button"
-                      @click="addSelectOption(key)"
-                      class="
-                        px-3
-                        py-1
-                        float-right
-                        bg-indigo-100
-                        text-indigo-500
-                        font-bold
-                        hover:text-indigo-600 hover:bg-indigo-200
-                        transition-all
-                        delay-300
-                        ease-in-out
-                      "
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="bg-gray-50">
-                <tr v-for="(option, k) in field.options" :key="k">
-                  <td
-                    class="
-                      px-6
-                      py-3
-                      border
-                      text-left text-xs
-                      font-medium
-                      text-gray-500
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    <input
-                      type="text"
-                      v-model="form.fields[key].options[k].value"
-                      class="w-full"
-                      placeholder="Select Value"
-                    />
-                  </td>
-                  <td
-                    class="
-                      px-6
-                      py-3
-                      border
-                      text-left text-xs
-                      font-medium
-                      text-gray-500
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    <input
-                      type="text"
-                      v-model="form.fields[key].options[k].text"
-                      class="w-full"
-                      placeholder="Select Text"
-                    />
-                  </td>
-                  <td
-                    class="
-                      px-6
-                      py-3
-                      border
-                      text-left text-xs
-                      font-medium
-                      text-gray-500
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    <button
-                      type="button"
-                      @click="removeSelectedOption(key, k)"
-                      class="
-                        px-3
-                        py-1
-                        bg-red-100
-                        text-red-500
-                        font-bold
-                        hover:text-red-600 hover:bg-red-200
-                        transition-all
-                        delay-300
-                        ease-in-out
-                      "
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    <icon-trash :classes="'w-4 h-4'" />
+                  </btn-danger>
+                </app-table-row-col>
+              </app-table-row>
+            </app-table>
           </div>
           <div class="w-full">
             <label class="block mt-6">
@@ -484,16 +265,45 @@
 import { computed, watch } from "vue";
 import { useStore } from "vuex";
 import useAlert from "../mixins/useAlert";
+import inputTypes from "../helpers/input-types";
+import { IconClose, IconPlus, IconSave, IconTrash } from "../components/icons";
+import { AppTable, AppTableRowCol, AppTableRow } from "../components/table";
+import {
+  BtnInfo,
+  BtnDanger,
+  BtnPrimary,
+  BtnSuccess,
+} from "../components/buttons";
 export default {
+  components: {
+    IconClose,
+    IconPlus,
+    IconSave,
+    IconTrash,
+    AppTable,
+    AppTableRowCol,
+    AppTableRow,
+    BtnInfo,
+    BtnPrimary,
+    BtnDanger,
+    BtnSuccess,
+  },
   setup() {
     const store = useStore();
     const { $confirm, $toast } = useAlert();
-
+    const input_types = inputTypes;
+    const option_header = [
+      { name: "Value", key: "value", classes: "text-left" },
+      { name: "Text", key: "text", classes: "text-left" },
+    ];
     let form = computed(function () {
       return store.state.form;
     });
     let is_updated = computed(function () {
       return store.state.is_updated;
+    });
+    let field = computed(function () {
+      return store.state.field;
     });
 
     watch(is_updated, function (value) {
@@ -511,23 +321,8 @@ export default {
       store.dispatch("GENERATE_SLUG");
     };
     const addField = function () {
-      const field = {
-        id: 0,
-        dynamic_form_id: this.form.id,
-        label: "",
-        placeholder: "",
-        name: "",
-        field_id: "",
-        width: "",
-        height: "",
-        type: "",
-        input_type: "",
-        rows: "",
-        is_required: false,
-        options: [],
-        is_new: true,
-      };
-      store.dispatch("SET_EMPTY_FIELD", field);
+      field.value.dynamic_form_id = form.value.id;
+      store.dispatch("SET_EMPTY_FIELD", field.value);
     };
 
     const removeField = async function (key) {
@@ -537,7 +332,7 @@ export default {
       }
     };
     const addSelectOption = function (key) {
-      const field = form.fields[key];
+      const field = form.value.fields[key];
       const option = {
         id: 0,
         value: "",
@@ -563,6 +358,8 @@ export default {
     return {
       form,
       is_updated,
+      input_types,
+      option_header,
       generateSlug,
       addField,
       removeField,
