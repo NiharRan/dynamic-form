@@ -17765,23 +17765,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _components_DuplicateModel_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/DuplicateModel.vue */ "./src/components/DuplicateModel.vue");
-/* harmony import */ var _mixins_useAlert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/useAlert */ "./src/mixins/useAlert.js");
-/* harmony import */ var _components_form_FormTableAction_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/form/FormTableAction.vue */ "./src/components/form/FormTableAction.vue");
-/* harmony import */ var _components_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/table */ "./src/components/table/index.js");
-/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.js");
-
-
-
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _components_DuplicateModel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/DuplicateModel.vue */ "./src/components/DuplicateModel.vue");
+/* harmony import */ var _components_form_FormTableAction_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/form/FormTableAction.vue */ "./src/components/form/FormTableAction.vue");
+/* harmony import */ var _components_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/table */ "./src/components/table/index.js");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.js");
+/* harmony import */ var _composables_useSlugable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../composables/useSlugable */ "./src/composables/useSlugable.js");
+/* harmony import */ var _composables_useAllForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../composables/useAllForm */ "./src/composables/useAllForm.js");
 
 
 
@@ -17793,126 +17784,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllForms",
   components: {
-    DuplicateModel: _components_DuplicateModel_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    FormTableAction: _components_form_FormTableAction_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    AppTable: _components_table__WEBPACK_IMPORTED_MODULE_8__.AppTable,
-    AppTableRow: _components_table__WEBPACK_IMPORTED_MODULE_8__.AppTableRow,
-    AppTableRowCol: _components_table__WEBPACK_IMPORTED_MODULE_8__.AppTableRowCol,
-    IconPlus: _components_icons__WEBPACK_IMPORTED_MODULE_9__.IconPlus,
-    IconCopy: _components_icons__WEBPACK_IMPORTED_MODULE_9__.IconCopy
+    DuplicateModel: _components_DuplicateModel_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    FormTableAction: _components_form_FormTableAction_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    AppTable: _components_table__WEBPACK_IMPORTED_MODULE_3__.AppTable,
+    AppTableRow: _components_table__WEBPACK_IMPORTED_MODULE_3__.AppTableRow,
+    AppTableRowCol: _components_table__WEBPACK_IMPORTED_MODULE_3__.AppTableRowCol,
+    IconPlus: _components_icons__WEBPACK_IMPORTED_MODULE_4__.IconPlus,
+    IconCopy: _components_icons__WEBPACK_IMPORTED_MODULE_4__.IconCopy
   },
   setup: function setup(_, context) {
     console.log(context);
-    var headers = [{
-      name: "Title",
-      key: "title",
-      classes: "text-left"
-    }, {
-      name: "Shortcode",
-      key: "shortcode",
-      classes: "text-left"
-    }, {
-      name: "Classes",
-      key: "classes",
-      classes: "text-left"
-    }, {
-      name: "Form ID",
-      key: "form_id",
-      classes: "text-left"
-    }, {
-      name: "Entries",
-      key: "entries",
-      classes: "text-center"
-    }, {
-      name: "Status",
-      key: "status",
-      classes: "text-center"
-    }];
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_4__.reactive)({
+    var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       title: "",
       slug: "",
       id: ""
     });
-
-    var _useAlert = (0,_mixins_useAlert__WEBPACK_IMPORTED_MODULE_6__["default"])(),
-        $confirm = _useAlert.$confirm,
-        $toast = _useAlert.$toast;
-
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_10__.useStore)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_7__.useStore)();
     store.dispatch("FETCH_ALL_FORMS"); // computed source codes
 
-    var forms = (0,vue__WEBPACK_IMPORTED_MODULE_4__.computed)(function () {
+    var headers = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.headers;
+    });
+    var forms = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.state.forms;
     });
-    var is_updated = (0,vue__WEBPACK_IMPORTED_MODULE_4__.computed)(function () {
-      return store.state.is_updated;
-    }); // watched code
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_4__.watch)(is_updated, function (value) {
-      $toast("Data updated successfully", "success");
-      store.dispatch("UPDATE_STATUS", false);
-    });
+    var _useSlugable = (0,_composables_useSlugable__WEBPACK_IMPORTED_MODULE_5__["default"])(form),
+        generateSlug = _useSlugable.generateSlug;
 
-    var generateSlug = function generateSlug() {
-      var slug = form.title.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
-      form.slug = slug;
-    };
-
-    var showDuplicateForm = function showDuplicateForm(row) {
-      form.id = row.id;
-      store.dispatch("UPDATE_MODAL_STATUS", true);
-    };
-
-    var duplicate = function duplicate() {
-      store.dispatch("DEPLICATE_FORM", form);
-    };
-
-    var destroy = /*#__PURE__*/function () {
-      var _ref = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(id) {
-        var result;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return $confirm("This form will be removed permanently");
-
-              case 2:
-                result = _context.sent;
-
-                if (result.isConfirmed) {
-                  store.dispatch("DESTROY_FORM", id);
-                }
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function destroy(_x) {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    var hideModel = function hideModel() {
-      store.dispatch("UPDATE_MODAL_STATUS", false);
-      form.title = "";
-      form.slug = "";
-      form.id = "";
-    };
-
-    var onCopy = function onCopy() {
-      alert("Copied");
-    };
+    var _useAllForm = (0,_composables_useAllForm__WEBPACK_IMPORTED_MODULE_6__["default"])(form),
+        duplicate = _useAllForm.duplicate,
+        showDuplicateForm = _useAllForm.showDuplicateForm,
+        destroy = _useAllForm.destroy,
+        hideModel = _useAllForm.hideModel,
+        onCopy = _useAllForm.onCopy;
 
     return {
       headers: headers,
       forms: forms,
       form: form,
-      is_updated: is_updated,
       showDuplicateForm: showDuplicateForm,
       generateSlug: generateSlug,
       duplicate: duplicate,
@@ -17933,21 +17843,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _mixins_useAlert__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixins/useAlert */ "./src/mixins/useAlert.js");
-/* harmony import */ var _helpers_input_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/input-types */ "./src/helpers/input-types.js");
-/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.js");
-/* harmony import */ var _components_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/table */ "./src/components/table/index.js");
-/* harmony import */ var _components_buttons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/buttons */ "./src/components/buttons/index.js");
-
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _helpers_input_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/input-types */ "./src/helpers/input-types.js");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.js");
+/* harmony import */ var _components_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/table */ "./src/components/table/index.js");
+/* harmony import */ var _components_buttons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/buttons */ "./src/components/buttons/index.js");
+/* harmony import */ var _composables_useSlugable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../composables/useSlugable */ "./src/composables/useSlugable.js");
+/* harmony import */ var _composables_useFormEdit__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../composables/useFormEdit */ "./src/composables/useFormEdit.js");
 
 
 
@@ -17960,26 +17867,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    IconClose: _components_icons__WEBPACK_IMPORTED_MODULE_7__.IconClose,
-    IconPlus: _components_icons__WEBPACK_IMPORTED_MODULE_7__.IconPlus,
-    IconSave: _components_icons__WEBPACK_IMPORTED_MODULE_7__.IconSave,
-    IconTrash: _components_icons__WEBPACK_IMPORTED_MODULE_7__.IconTrash,
-    AppTable: _components_table__WEBPACK_IMPORTED_MODULE_8__.AppTable,
-    AppTableRowCol: _components_table__WEBPACK_IMPORTED_MODULE_8__.AppTableRowCol,
-    AppTableRow: _components_table__WEBPACK_IMPORTED_MODULE_8__.AppTableRow,
-    BtnInfo: _components_buttons__WEBPACK_IMPORTED_MODULE_9__.BtnInfo,
-    BtnPrimary: _components_buttons__WEBPACK_IMPORTED_MODULE_9__.BtnPrimary,
-    BtnDanger: _components_buttons__WEBPACK_IMPORTED_MODULE_9__.BtnDanger,
-    BtnSuccess: _components_buttons__WEBPACK_IMPORTED_MODULE_9__.BtnSuccess
+    IconClose: _components_icons__WEBPACK_IMPORTED_MODULE_4__.IconClose,
+    IconPlus: _components_icons__WEBPACK_IMPORTED_MODULE_4__.IconPlus,
+    IconSave: _components_icons__WEBPACK_IMPORTED_MODULE_4__.IconSave,
+    IconTrash: _components_icons__WEBPACK_IMPORTED_MODULE_4__.IconTrash,
+    AppTable: _components_table__WEBPACK_IMPORTED_MODULE_5__.AppTable,
+    AppTableRowCol: _components_table__WEBPACK_IMPORTED_MODULE_5__.AppTableRowCol,
+    AppTableRow: _components_table__WEBPACK_IMPORTED_MODULE_5__.AppTableRow,
+    BtnInfo: _components_buttons__WEBPACK_IMPORTED_MODULE_6__.BtnInfo,
+    BtnPrimary: _components_buttons__WEBPACK_IMPORTED_MODULE_6__.BtnPrimary,
+    BtnDanger: _components_buttons__WEBPACK_IMPORTED_MODULE_6__.BtnDanger,
+    BtnSuccess: _components_buttons__WEBPACK_IMPORTED_MODULE_6__.BtnSuccess
   },
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_10__.useStore)();
-
-    var _useAlert = (0,_mixins_useAlert__WEBPACK_IMPORTED_MODULE_5__["default"])(),
-        $confirm = _useAlert.$confirm,
-        $toast = _useAlert.$toast;
-
-    var input_types = _helpers_input_types__WEBPACK_IMPORTED_MODULE_6__["default"];
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_9__.useStore)();
+    var input_types = _helpers_input_types__WEBPACK_IMPORTED_MODULE_3__["default"];
     var option_header = [{
       name: "Value",
       key: "value",
@@ -17989,118 +17891,29 @@ __webpack_require__.r(__webpack_exports__);
       key: "text",
       classes: "text-left"
     }];
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_4__.computed)(function () {
+    var form = (0,vue__WEBPACK_IMPORTED_MODULE_2__.computed)(function () {
       return store.state.form;
     });
-    var is_updated = (0,vue__WEBPACK_IMPORTED_MODULE_4__.computed)(function () {
-      return store.state.is_updated;
-    });
-    var field = (0,vue__WEBPACK_IMPORTED_MODULE_4__.computed)(function () {
+    var field = (0,vue__WEBPACK_IMPORTED_MODULE_2__.computed)(function () {
       return store.state.field;
-    });
-    (0,vue__WEBPACK_IMPORTED_MODULE_4__.watch)(is_updated, function (value) {
-      $toast("Data updated successfully", "success");
-      store.dispatch("UPDATE_STATUS", false);
     });
     var url = window.location.href;
     var url_params = url.split("/");
     var id = url_params[url_params.length - 1];
     store.dispatch("SET_FORM", id); // methods
 
-    var generateSlug = function generateSlug() {
-      store.dispatch("GENERATE_SLUG");
-    };
+    var _useSlugable = (0,_composables_useSlugable__WEBPACK_IMPORTED_MODULE_7__["default"])(form),
+        generateSlug = _useSlugable.generateSlug;
 
-    var addField = function addField() {
-      field.value.dynamic_form_id = form.value.id;
-      store.dispatch("SET_EMPTY_FIELD", field.value);
-    };
-
-    var removeField = /*#__PURE__*/function () {
-      var _ref = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(key) {
-        var result;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return $confirm("This field will be removed permanently");
-
-              case 2:
-                result = _context.sent;
-
-                if (result.isConfirmed) {
-                  store.dispatch("REMOVE_FIELD", key);
-                }
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function removeField(_x) {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    var addSelectOption = function addSelectOption(key) {
-      var field = form.value.fields[key];
-      var option = {
-        id: 0,
-        value: "",
-        text: "",
-        form_field_id: field.id
-      };
-      store.dispatch("SET_EMPTY_OPTION", {
-        option: option,
-        key: key
-      });
-    };
-
-    var updateForm = function updateForm() {
-      store.dispatch("UPDATE_FORM", form.value);
-    };
-
-    var removeSelectedOption = /*#__PURE__*/function () {
-      var _ref2 = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(key, k) {
-        var result, payload;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return $confirm("This field option will be removed permanently");
-
-              case 2:
-                result = _context2.sent;
-
-                if (result.isConfirmed) {
-                  payload = {
-                    key: key,
-                    k: k
-                  };
-                  store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
-                }
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      return function removeSelectedOption(_x2, _x3) {
-        return _ref2.apply(this, arguments);
-      };
-    }();
+    var _useFormEdit = (0,_composables_useFormEdit__WEBPACK_IMPORTED_MODULE_8__["default"])(form, field),
+        removeField = _useFormEdit.removeField,
+        addSelectOption = _useFormEdit.addSelectOption,
+        removeSelectedOption = _useFormEdit.removeSelectedOption,
+        addField = _useFormEdit.addField,
+        updateForm = _useFormEdit.updateForm;
 
     return {
       form: form,
-      is_updated: is_updated,
       input_types: input_types,
       option_header: option_header,
       generateSlug: generateSlug,
@@ -18203,36 +18016,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _mixins_useAlert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/useAlert */ "./src/mixins/useAlert.js");
-/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.js");
-/* harmony import */ var _components_buttons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/buttons */ "./src/components/buttons/index.js");
-
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.js");
+/* harmony import */ var _components_buttons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/buttons */ "./src/components/buttons/index.js");
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    IconPlus: _components_icons__WEBPACK_IMPORTED_MODULE_2__.IconPlus,
-    BtnSuccess: _components_buttons__WEBPACK_IMPORTED_MODULE_3__.BtnSuccess,
-    IconClose: _components_icons__WEBPACK_IMPORTED_MODULE_2__.IconClose
+    IconPlus: _components_icons__WEBPACK_IMPORTED_MODULE_1__.IconPlus,
+    BtnSuccess: _components_buttons__WEBPACK_IMPORTED_MODULE_2__.BtnSuccess,
+    IconClose: _components_icons__WEBPACK_IMPORTED_MODULE_1__.IconClose
   },
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)();
-
-    var _useAlert = (0,_mixins_useAlert__WEBPACK_IMPORTED_MODULE_1__["default"])(),
-        $toast = _useAlert.$toast;
-
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.state.formData;
-    });
-    var is_updated = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return store.state.is_updated;
-    });
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(is_updated, function (value) {
-      $toast("Data updated successfully", "success");
-      store.dispatch("UPDATE_STATUS", false);
     }); // methods
 
     var createNewForm = function createNewForm() {
@@ -18241,7 +18041,6 @@ __webpack_require__.r(__webpack_exports__);
 
     return {
       formData: formData,
-      is_updated: is_updated,
       createNewForm: createNewForm
     };
   }
@@ -19853,6 +19652,342 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/composables/useAlert.js":
+/*!*************************************!*\
+  !*** ./src/composables/useAlert.js ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* export default binding */ __WEBPACK_DEFAULT_EXPORT__; }
+/* harmony export */ });
+/* harmony import */ var _Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+
+
+
+var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: function didOpen(toast) {
+    toast.addEventListener("mouseenter", (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().stopTimer));
+    toast.addEventListener("mouseleave", (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().resumeTimer));
+  }
+});
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)();
+  var is_updated = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
+    return store.state.is_updated;
+  });
+  (0,vue__WEBPACK_IMPORTED_MODULE_3__.watch)(is_updated, function (value) {
+    $toast("Data updated successfully", "success");
+    store.dispatch("UPDATE_STATUS", false);
+  });
+
+  var $toast = function $toast(message, type) {
+    return Toast.fire({
+      icon: type,
+      title: message
+    });
+  };
+
+  var $confirm = /*#__PURE__*/function () {
+    var _ref = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(message) {
+      var confirmText,
+          _args = arguments;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              confirmText = _args.length > 1 && _args[1] !== undefined ? _args[1] : "Yes, delete it!";
+              _context.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                title: "Are you sure?",
+                text: message,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: confirmText
+              });
+
+            case 3:
+              return _context.abrupt("return", _context.sent);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function $confirm(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return {
+    $toast: $toast,
+    $confirm: $confirm
+  };
+}
+
+/***/ }),
+
+/***/ "./src/composables/useAllForm.js":
+/*!***************************************!*\
+  !*** ./src/composables/useAllForm.js ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ useAllForm; }
+/* harmony export */ });
+/* harmony import */ var _Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _useAlert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useAlert */ "./src/composables/useAlert.js");
+
+
+
+
+function useAllForm(form) {
+  var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+
+  var _useAlert = (0,_useAlert__WEBPACK_IMPORTED_MODULE_2__["default"])(),
+      $confirm = _useAlert.$confirm;
+
+  var showDuplicateForm = function showDuplicateForm(row) {
+    form.id = row.id;
+    store.dispatch("UPDATE_MODAL_STATUS", true);
+  };
+
+  var duplicate = function duplicate() {
+    store.dispatch("DEPLICATE_FORM", form);
+  };
+
+  var destroy = /*#__PURE__*/function () {
+    var _ref = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(id) {
+      var result;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return $confirm("This form will be removed permanently");
+
+            case 2:
+              result = _context.sent;
+
+              if (result.isConfirmed) {
+                store.dispatch("DESTROY_FORM", id);
+              }
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function destroy(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var hideModel = function hideModel() {
+    store.dispatch("UPDATE_MODAL_STATUS", false);
+    form.title = "";
+    form.slug = "";
+    form.id = "";
+  };
+
+  var onCopy = function onCopy() {
+    alert("Copied");
+  };
+
+  return {
+    showDuplicateForm: showDuplicateForm,
+    duplicate: duplicate,
+    destroy: destroy,
+    hideModel: hideModel,
+    onCopy: onCopy
+  };
+}
+
+/***/ }),
+
+/***/ "./src/composables/useFormEdit.js":
+/*!****************************************!*\
+  !*** ./src/composables/useFormEdit.js ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ useFormEdit; }
+/* harmony export */ });
+/* harmony import */ var _Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _useAlert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useAlert */ "./src/composables/useAlert.js");
+
+
+
+
+function useFormEdit(form, field) {
+  var _useAlert = (0,_useAlert__WEBPACK_IMPORTED_MODULE_2__["default"])(),
+      $confirm = _useAlert.$confirm;
+
+  var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+
+  var removeField = /*#__PURE__*/function () {
+    var _ref = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(key) {
+      var result;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return $confirm("This field will be removed permanently");
+
+            case 2:
+              result = _context.sent;
+
+              if (result.isConfirmed) {
+                store.dispatch("REMOVE_FIELD", key);
+              }
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function removeField(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var addSelectOption = function addSelectOption(key) {
+    var field = form.value.fields[key];
+    var option = {
+      id: 0,
+      value: "",
+      text: "",
+      form_field_id: field.id
+    };
+    store.dispatch("SET_EMPTY_OPTION", {
+      option: option,
+      key: key
+    });
+  };
+
+  var removeSelectedOption = /*#__PURE__*/function () {
+    var _ref2 = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(key, k) {
+      var result, payload;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return $confirm("This field option will be removed permanently");
+
+            case 2:
+              result = _context2.sent;
+
+              if (result.isConfirmed) {
+                payload = {
+                  key: key,
+                  k: k
+                };
+                store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
+              }
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function removeSelectedOption(_x2, _x3) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var addField = function addField() {
+    field.value.dynamic_form_id = form.value.id;
+    store.dispatch("SET_EMPTY_FIELD", field.value);
+  };
+
+  var updateForm = function updateForm() {
+    store.dispatch("UPDATE_FORM", form.value);
+  };
+
+  return {
+    addField: addField,
+    removeField: removeField,
+    addSelectOption: addSelectOption,
+    removeSelectedOption: removeSelectedOption,
+    updateForm: updateForm
+  };
+}
+
+/***/ }),
+
+/***/ "./src/composables/useSlugable.js":
+/*!****************************************!*\
+  !*** ./src/composables/useSlugable.js ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ useSlugable; }
+/* harmony export */ });
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function useSlugable(form) {
+  function generateSlug() {
+    var slug = form.title.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
+    form.slug = slug;
+  }
+
+  return {
+    generateSlug: generateSlug
+  };
+}
+
+/***/ }),
+
 /***/ "./src/helpers/input-types.js":
 /*!************************************!*\
   !*** ./src/helpers/input-types.js ***!
@@ -19951,88 +20086,6 @@ app.use(vue3_clipboard__WEBPACK_IMPORTED_MODULE_1__["default"], {
   appendToBody: true
 });
 app.mount("#app");
-
-/***/ }),
-
-/***/ "./src/mixins/useAlert.js":
-/*!********************************!*\
-  !*** ./src/mixins/useAlert.js ***!
-  \********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* export default binding */ __WEBPACK_DEFAULT_EXPORT__; }
-/* harmony export */ });
-/* harmony import */ var _Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: function didOpen(toast) {
-    toast.addEventListener("mouseenter", (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().stopTimer));
-    toast.addEventListener("mouseleave", (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().resumeTimer));
-  }
-});
-/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
-  var $toast = function $toast(message, type) {
-    return Toast.fire({
-      icon: type,
-      title: message
-    });
-  };
-
-  var $confirm = /*#__PURE__*/function () {
-    var _ref = (0,_Users_imac_Projects_wp_wp_content_plugins_dynamic_form_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(message) {
-      var confirmText,
-          _args = arguments;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              confirmText = _args.length > 1 && _args[1] !== undefined ? _args[1] : "Yes, delete it!";
-              _context.next = 3;
-              return sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
-                title: "Are you sure?",
-                text: message,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: confirmText
-              });
-
-            case 3:
-              return _context.abrupt("return", _context.sent);
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function $confirm(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  return {
-    $toast: $toast,
-    $confirm: $confirm
-  };
-}
 
 /***/ }),
 
@@ -20605,6 +20658,31 @@ __webpack_require__.r(__webpack_exports__);
       options: [],
       is_new: true
     },
+    headers: [{
+      name: "Title",
+      key: "title",
+      classes: "text-left"
+    }, {
+      name: "Shortcode",
+      key: "shortcode",
+      classes: "text-left"
+    }, {
+      name: "Classes",
+      key: "classes",
+      classes: "text-left"
+    }, {
+      name: "Form ID",
+      key: "form_id",
+      classes: "text-left"
+    }, {
+      name: "Entries",
+      key: "entries",
+      classes: "text-center"
+    }, {
+      name: "Status",
+      key: "status",
+      classes: "text-center"
+    }],
     is_updated: false,
     is_visible: false
   },

@@ -264,7 +264,6 @@
 <script>
 import { computed, watch } from "vue";
 import { useStore } from "vuex";
-import useAlert from "../mixins/useAlert";
 import inputTypes from "../helpers/input-types";
 import { IconClose, IconPlus, IconSave, IconTrash } from "../components/icons";
 import { AppTable, AppTableRowCol, AppTableRow } from "../components/table";
@@ -274,6 +273,8 @@ import {
   BtnPrimary,
   BtnSuccess,
 } from "../components/buttons";
+import useSlugable from "../composables/useSlugable";
+import useFormEdit from "../composables/useFormEdit";
 export default {
   components: {
     IconClose,
@@ -290,7 +291,6 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { $confirm, $toast } = useAlert();
     const input_types = inputTypes;
     const option_header = [
       { name: "Value", key: "value", classes: "text-left" },
@@ -299,16 +299,9 @@ export default {
     let form = computed(function () {
       return store.state.form;
     });
-    let is_updated = computed(function () {
-      return store.state.is_updated;
-    });
+
     let field = computed(function () {
       return store.state.field;
-    });
-
-    watch(is_updated, function (value) {
-      $toast("Data updated successfully", "success");
-      store.dispatch("UPDATE_STATUS", false);
     });
 
     const url = window.location.href;
@@ -317,47 +310,17 @@ export default {
     store.dispatch("SET_FORM", id);
 
     // methods
-    const generateSlug = function () {
-      store.dispatch("GENERATE_SLUG");
-    };
-    const addField = function () {
-      field.value.dynamic_form_id = form.value.id;
-      store.dispatch("SET_EMPTY_FIELD", field.value);
-    };
-
-    const removeField = async function (key) {
-      const result = await $confirm("This field will be removed permanently");
-      if (result.isConfirmed) {
-        store.dispatch("REMOVE_FIELD", key);
-      }
-    };
-    const addSelectOption = function (key) {
-      const field = form.value.fields[key];
-      const option = {
-        id: 0,
-        value: "",
-        text: "",
-        form_field_id: field.id,
-      };
-
-      store.dispatch("SET_EMPTY_OPTION", { option, key });
-    };
-    const updateForm = function () {
-      store.dispatch("UPDATE_FORM", form.value);
-    };
-    const removeSelectedOption = async function (key, k) {
-      const result = await $confirm(
-        "This field option will be removed permanently"
-      );
-      if (result.isConfirmed) {
-        const payload = { key: key, k: k };
-        store.dispatch("REMOVE_OPTION_FROM_LIST", payload);
-      }
-    };
+    const { generateSlug } = useSlugable(form);
+    const {
+      removeField,
+      addSelectOption,
+      removeSelectedOption,
+      addField,
+      updateForm,
+    } = useFormEdit(form, field);
 
     return {
       form,
-      is_updated,
       input_types,
       option_header,
       generateSlug,

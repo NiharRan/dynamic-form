@@ -107,13 +107,14 @@
 </template>
 
 <script>
-import { computed, reactive, toRef, watch } from "vue";
+import { computed, reactive } from "vue";
 import { useStore } from "vuex";
 import DuplicateModel from "../components/DuplicateModel.vue";
-import useAlert from "../mixins/useAlert";
 import FormTableAction from "../components/form/FormTableAction.vue";
 import { AppTable, AppTableRow, AppTableRowCol } from "../components/table";
 import { IconPlus, IconCopy } from "../components/icons";
+import useSlugable from "../composables/useSlugable";
+import useAllForm from "../composables/useAllForm";
 export default {
   name: "AllForms",
   components: {
@@ -127,77 +128,30 @@ export default {
   },
   setup(_, context) {
     console.log(context);
-    const headers = [
-      { name: "Title", key: "title", classes: "text-left" },
-      { name: "Shortcode", key: "shortcode", classes: "text-left" },
-      { name: "Classes", key: "classes", classes: "text-left" },
-      { name: "Form ID", key: "form_id", classes: "text-left" },
-      { name: "Entries", key: "entries", classes: "text-center" },
-      { name: "Status", key: "status", classes: "text-center" },
-    ];
     let form = reactive({
       title: "",
       slug: "",
       id: "",
     });
-    const { $confirm, $toast } = useAlert();
     const store = useStore();
     store.dispatch("FETCH_ALL_FORMS");
 
     // computed source codes
+    let headers = computed(function () {
+      return store.state.headers;
+    });
     let forms = computed(function () {
       return store.state.forms;
     });
-    let is_updated = computed(function () {
-      return store.state.is_updated;
-    });
 
-    // watched code
-    watch(is_updated, function (value) {
-      $toast("Data updated successfully", "success");
-      store.dispatch("UPDATE_STATUS", false);
-    });
-
-    const generateSlug = function () {
-      const slug = form.title
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/[^\w-]+/g, "");
-      form.slug = slug;
-    };
-
-    const showDuplicateForm = function (row) {
-      form.id = row.id;
-      store.dispatch("UPDATE_MODAL_STATUS", true);
-    };
-
-    const duplicate = function () {
-      store.dispatch("DEPLICATE_FORM", form);
-    };
-
-    const destroy = async function (id) {
-      const result = await $confirm("This form will be removed permanently");
-      if (result.isConfirmed) {
-        store.dispatch("DESTROY_FORM", id);
-      }
-    };
-
-    const hideModel = function () {
-      store.dispatch("UPDATE_MODAL_STATUS", false);
-      form.title = "";
-      form.slug = "";
-      form.id = "";
-    };
-
-    const onCopy = function () {
-      alert("Copied");
-    };
+    const { generateSlug } = useSlugable(form);
+    const { duplicate, showDuplicateForm, destroy, hideModel, onCopy } =
+      useAllForm(form);
 
     return {
       headers,
       forms,
       form,
-      is_updated,
       showDuplicateForm,
       generateSlug,
       duplicate,
