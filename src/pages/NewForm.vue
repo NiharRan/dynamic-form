@@ -30,26 +30,16 @@
 </template>
 
 <script>
-import { computed, watch } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
-import useAlert from "../mixins/useAlert";
 import { IconPlus, IconClose } from "../components/icons";
 import { BtnSuccess } from "../components/buttons";
 export default {
   components: { IconPlus, BtnSuccess, IconClose },
   setup() {
     const store = useStore();
-    const { $toast } = useAlert();
     let formData = computed(function () {
       return store.state.formData;
-    });
-    let is_updated = computed(function () {
-      return store.state.is_updated;
-    });
-
-    watch(is_updated, function (value) {
-      $toast("Data updated successfully", "success");
-      store.dispatch("UPDATE_STATUS", false);
     });
 
     // methods
@@ -57,7 +47,7 @@ export default {
       store.dispatch("CREATE_NEW_FORM");
     };
 
-    return { formData, is_updated, createNewForm };
+    return { formData, createNewForm };
   },
 };
 </script>
