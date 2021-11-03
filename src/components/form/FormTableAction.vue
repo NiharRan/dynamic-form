@@ -35,14 +35,5 @@ export default {
       default: "",
     },
   },
-  setup(props, { emit }) {
-    const destroy = function (id) {
-      emit("destroy", id);
-    };
-
-    return {
-      destroy,
-    };
-  },
 };
 </script>

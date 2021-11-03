@@ -3,22 +3,7 @@
     <div class="bg-white shadow-lg p-4 w-full m-auto">
       <h1 class="flex justify-between items-center">
         <span>Preview Form</span>
-        <router-link
-          to="/"
-          class="
-            px-3
-            py-1
-            bg-indigo-500
-            text-white
-            rounded-md
-            hover:text-white hover:bg-indigo-600
-            transition-all
-            delay-300
-            ease-in-out
-          "
-        >
-          Back
-        </router-link>
+        <router-link to="/" class="link-btn"> Back </router-link>
       </h1>
 
       <div class="w-6/12 mx-auto border p-4 rounded">

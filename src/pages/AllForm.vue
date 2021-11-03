@@ -2,19 +2,7 @@
   <div class="bg-white shadow-lg p-4 w-full m-auto">
     <h1 class="flex justify-between items-center !p-0">
       <span>All Forms</span>
-      <router-link
-        to="/new-form"
-        class="
-          px-4
-          py-2
-          bg-indigo-100
-          text-indigo-500
-          hover:text-indigo-600 hover:bg-indigo-200
-          transition-all
-          delay-300
-          ease-in-out
-        "
-      >
+      <router-link to="/new-form" class="link-btn">
         <icon-plus />
       </router-link>
     </h1>
@@ -49,48 +37,13 @@
             <!-- Table action end here -->
           </app-table-row-col>
           <app-table-row-col>
-            <span
-              class="
-                flex
-                items-center
-                border border-gray-300
-                px-2
-                py-1
-                rounded
-                bg-gray-100
-              "
-            >
-              <span
-                class="mr-4 cursor-pointer"
-                v-clipboard:copy="form.shortcode"
-                v-clipboard:success="onCopy"
-              >
-                <icon-copy :classes="'w-4 h-4'" />
-              </span>
-              <span class="">{{ form.shortcode }}</span>
-            </span>
+            <copyable :text="form.shortcode" />
           </app-table-row-col>
           <app-table-row-col :text="form.classes" />
           <app-table-row-col :text="form.form_id" />
           <app-table-row-col :text="form.total_entries" />
           <app-table-row-col>
-            <span
-              class="
-                px-2
-                inline-flex
-                text-xs
-                leading-5
-                font-semibold
-                rounded-full
-              "
-              :class="[
-                form.status == 1
-                  ? 'bg-green-100 text-green-800'
-                  : 'bg-red-100 text-red-800',
-              ]"
-            >
-              {{ form.status == 1 ? "Active" : "Inactive" }}
-            </span>
+            <status-label :status="form.status" />
           </app-table-row-col>
         </app-table-row>
       </app-table>
@@ -109,7 +62,9 @@
 <script>
 import { computed, reactive } from "vue";
 import { useStore } from "vuex";
+import Copyable from "../components/Copyable.vue";
 import DuplicateModel from "../components/DuplicateModel.vue";
+import StatusLabel from "../components/StatusLabel.vue";
 import FormTableAction from "../components/form/FormTableAction.vue";
 import { AppTable, AppTableRow, AppTableRowCol } from "../components/table";
 import { IconPlus, IconCopy } from "../components/icons";
@@ -125,6 +80,8 @@ export default {
     AppTableRowCol,
     IconPlus,
     IconCopy,
+    StatusLabel,
+    Copyable,
   },
   setup(_, context) {
     console.log(context);
@@ -145,7 +102,7 @@ export default {
     });
 
     const { generateSlug } = useSlugable(form);
-    const { duplicate, showDuplicateForm, destroy, hideModel, onCopy } =
+    const { duplicate, showDuplicateForm, destroy, hideModel } =
       useAllForm(form);
 
     return {
@@ -157,7 +114,6 @@ export default {
       duplicate,
       destroy,
       hideModel,
-      onCopy,
     };
   },
 };

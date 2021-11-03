@@ -27,15 +27,10 @@ export default function useAllForm(form) {
     form.id = "";
   };
 
-  const onCopy = function () {
-    alert("Copied");
-  };
-
   return {
     showDuplicateForm,
     duplicate,
     destroy,
     hideModel,
-    onCopy,
   };
 }
