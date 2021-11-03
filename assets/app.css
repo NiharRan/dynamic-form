@@ -970,13 +970,13 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(254, 226, 226, var(--tw-bg-opacity));
 }
-.bg-indigo-100 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
-}
 .bg-gray-100 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+.bg-indigo-100 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
 }
 .bg-indigo-500 {
 	--tw-bg-opacity: 1;
@@ -1089,10 +1089,6 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(239, 68, 68, var(--tw-text-opacity));
 }
-.text-indigo-500 {
-	--tw-text-opacity: 1;
-	color: rgba(99, 102, 241, var(--tw-text-opacity));
-}
 .text-green-800 {
 	--tw-text-opacity: 1;
 	color: rgba(6, 95, 70, var(--tw-text-opacity));
@@ -1100,6 +1096,10 @@ select {
 .text-red-800 {
 	--tw-text-opacity: 1;
 	color: rgba(153, 27, 27, var(--tw-text-opacity));
+}
+.text-indigo-500 {
+	--tw-text-opacity: 1;
+	color: rgba(99, 102, 241, var(--tw-text-opacity));
 }
 .text-gray-500 {
 	--tw-text-opacity: 1;
@@ -1153,6 +1153,29 @@ select {
 label {
 	float: left !important;
 	text-align: left !important;
+}
+
+.link-btn {
+	--tw-bg-opacity: 1;
+	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	--tw-text-opacity: 1;
+	color: rgba(99, 102, 241, var(--tw-text-opacity));
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	transition-delay: 300ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-btn:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(199, 210, 254, var(--tw-bg-opacity));
+	--tw-text-opacity: 1;
+	color: rgba(79, 70, 229, var(--tw-text-opacity));
 }
 
 .hover\:bg-blue-500:hover {

@@ -43,8 +43,13 @@ export default function () {
     });
   };
 
+  const onCopy = function () {
+    alert("Copied");
+  };
+
   return {
     $toast,
     $confirm,
+    onCopy,
   };
 }

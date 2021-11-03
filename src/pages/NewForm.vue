@@ -3,22 +3,7 @@
     <h1 class="flex justify-between items-center !p-0">
       <span>Generate New Form</span>
       <div class="flex">
-        <router-link
-          to="/"
-          class="
-            px-4
-            py-2
-            block
-            mr-4
-            bg-indigo-100
-            text-indigo-500
-            font-bold
-            hover:text-indigo-600 hover:bg-indigo-200
-            transition-all
-            delay-300
-            ease-in-out
-          "
-        >
+        <router-link to="/" class="link-btn">
           <icon-close />
         </router-link>
         <btn-success v-if="!formData" @click="createNewForm" class="px-4 py-2">

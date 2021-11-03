@@ -5,22 +5,7 @@
         <span>Form</span>
 
         <div class="flex">
-          <router-link
-            to="/"
-            class="
-              px-4
-              py-2
-              block
-              mr-4
-              bg-indigo-100
-              text-indigo-500
-              font-bold
-              hover:text-indigo-600 hover:bg-indigo-200
-              transition-all
-              delay-300
-              ease-in-out
-            "
-          >
+          <router-link to="/" class="link-btn">
             <icon-close />
           </router-link>
           <btn-success @click="updateForm" class="px-4 py-2">
@@ -262,7 +247,7 @@
 </template>
 
 <script>
-import { computed, watch } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 import inputTypes from "../helpers/input-types";
 import { IconClose, IconPlus, IconSave, IconTrash } from "../components/icons";
